@@ -22,6 +22,7 @@
 		428FBCD21F8E917F004E82DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		428FBCD51F8E917F004E82DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		428FBCD71F8E917F004E82DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		428FBCDD1F8E92B0004E82DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +60,7 @@
 				428FBCCF1F8E917F004E82DE /* Main.storyboard */,
 				428FBCD21F8E917F004E82DE /* Assets.xcassets */,
 				428FBCD41F8E917F004E82DE /* LaunchScreen.storyboard */,
+				428FBCDD1F8E92B0004E82DE /* GoogleService-Info.plist */,
 				428FBCD71F8E917F004E82DE /* Info.plist */,
 			);
 			path = eatin;
