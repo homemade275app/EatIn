@@ -1,5 +1,5 @@
 //
-//  SavedController.swift
+//  RegisterController.swift
 //  eatin
 //
 //  Created by Blaine Andreoli on 10/12/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SavedController: UIViewController {
+class RegisterController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

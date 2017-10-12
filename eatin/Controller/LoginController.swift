@@ -76,6 +76,10 @@ class LoginController: UIViewController {
                     return
                 }
                 
+                //let registerController = RegisterController()
+                
+                //self.present(registerController, animated: true, completion: nil)
+                
                 self.dismiss(animated: true, completion: nil)
             })
         }
