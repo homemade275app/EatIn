@@ -28,10 +28,10 @@ class LoginController: UIViewController {
     
     let loginRegisterButton: UIButton = {
         let button = UIButton(type: .system)
-        //button.backgroundColor = UIColor(r: 255, g: 165, b: 0)
+        button.backgroundColor = UIColor(r: 255, g: 255, b: 255)
         button.setTitle("Register", for: UIControlState())
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(UIColor.white, for: UIControlState())
+        button.setTitleColor(UIColor.orange, for: UIControlState())
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         
         button.addTarget(self, action:#selector(handleLoginRegister), for: .touchUpInside)

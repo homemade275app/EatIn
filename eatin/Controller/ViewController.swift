@@ -21,7 +21,7 @@ class ViewController: UITabBarController {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         
-        setUpTabView()
+        handleTabs()
     }
     
     @objc
@@ -38,34 +38,32 @@ class ViewController: UITabBarController {
         present(loginController, animated: true, completion: nil)
     }
     
-    func setUpTabView() {
-        let tabOne = ExploreController()
-        let tabTwo = CategoryController()
-        let tabThree = SavedController()
-        let tabFour = InboxController()
-        let tabFive = ProfileController()
+    func handleTabs() {
+        super.viewDidLoad()
         
-        let tabOneBarItem = UITabBarItem(title: "Tab 1", image: UIImage(named: "defaultImage.png"), selectedImage: UIImage(named: "selectedImage.png"))
+        //setup our custom view controllers
+        let exploreController = UINavigationController(rootViewController: ExploreController())
+        exploreController.tabBarItem.title = "Explore"
+        exploreController.tabBarItem.image = UIImage(named: "explore")
         
-        tabOne.tabBarItem = tabOneBarItem
+        let categoryController = UINavigationController(rootViewController: CategoryController())
+        categoryController.tabBarItem.title = "Categories"
+        categoryController.tabBarItem.image = UIImage(named: "category")
         
-        let tabTwoBarItem = UITabBarItem(title: "Tab 2", image: UIImage(named: "defaultImage.png"), selectedImage: UIImage(named: "selectedImage.png"))
+        let savedController = UINavigationController(rootViewController: SavedController())
+        savedController.tabBarItem.title = "Saved"
+        savedController.tabBarItem.image = UIImage(named: "saved")
         
-        tabTwo.tabBarItem = tabTwoBarItem
+        let inboxController = UINavigationController(rootViewController: InboxController())
+        inboxController.tabBarItem.title = "Inbox"
+        inboxController.tabBarItem.image = UIImage(named: "inbox")
         
-        let tabThreeBarItem = UITabBarItem(title: "Tab 3", image: UIImage(named: "defaultImage.png"), selectedImage: UIImage(named: "selectedImage.png"))
+        let profileController = UINavigationController(rootViewController: ProfileController())
+        profileController.tabBarItem.title = "Profile"
+        profileController.tabBarItem.image = UIImage(named: "profile")
         
-        tabThree.tabBarItem = tabThreeBarItem
+        viewControllers = [exploreController, categoryController, savedController, inboxController, profileController]
         
-        let tabFourBarItem = UITabBarItem(title: "Tab 4", image: UIImage(named: "defaultImage.png"), selectedImage: UIImage(named: "selectedImage.png"))
-        
-        tabFour.tabBarItem = tabFourBarItem
-        
-        let tabFiveBarItem = UITabBarItem(title: "Tab 5", image: UIImage(named: "defaultImage.png"), selectedImage: UIImage(named: "selectedImage.png"))
-        
-        tabFive.tabBarItem = tabFiveBarItem
-        
-        self.viewControllers = [tabOne, tabTwo, tabThree, tabFour, tabFive]
     }
 }
 
