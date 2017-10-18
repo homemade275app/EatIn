@@ -13,7 +13,6 @@
 		426FCC1C1F8FDF9900DDE8F2 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426FCC1B1F8FDF9900DDE8F2 /* ProfileController.swift */; };
 		426FCC1E1F8FDFAA00DDE8F2 /* InboxController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426FCC1D1F8FDFAA00DDE8F2 /* InboxController.swift */; };
 		426FCC201F8FDFC800DDE8F2 /* SavedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426FCC1F1F8FDFC800DDE8F2 /* SavedController.swift */; };
-		426FCC221F8FE09B00DDE8F2 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426FCC211F8FE09B00DDE8F2 /* RegisterController.swift */; };
 		428FBCCC1F8E917F004E82DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428FBCCB1F8E917F004E82DE /* AppDelegate.swift */; };
 		428FBCCE1F8E917F004E82DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428FBCCD1F8E917F004E82DE /* ViewController.swift */; };
 		428FBCD11F8E917F004E82DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 428FBCCF1F8E917F004E82DE /* Main.storyboard */; };
@@ -30,7 +29,6 @@
 		426FCC1B1F8FDF9900DDE8F2 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		426FCC1D1F8FDFAA00DDE8F2 /* InboxController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxController.swift; sourceTree = "<group>"; };
 		426FCC1F1F8FDFC800DDE8F2 /* SavedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedController.swift; sourceTree = "<group>"; };
-		426FCC211F8FE09B00DDE8F2 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		428FBCC81F8E917F004E82DE /* eatin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eatin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		428FBCCB1F8E917F004E82DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		428FBCCD1F8E917F004E82DE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -93,7 +91,6 @@
 			children = (
 				428FBCCD1F8E917F004E82DE /* ViewController.swift */,
 				428FBCE11F8E96F4004E82DE /* LoginController.swift */,
-				426FCC211F8FE09B00DDE8F2 /* RegisterController.swift */,
 				426FCC171F8FDF2B00DDE8F2 /* ExploreController.swift */,
 				426FCC191F8FDF4B00DDE8F2 /* CategoryController.swift */,
 				426FCC1F1F8FDFC800DDE8F2 /* SavedController.swift */,
@@ -264,7 +261,6 @@
 				428FBCCC1F8E917F004E82DE /* AppDelegate.swift in Sources */,
 				426FCC1C1F8FDF9900DDE8F2 /* ProfileController.swift in Sources */,
 				426FCC201F8FDFC800DDE8F2 /* SavedController.swift in Sources */,
-				426FCC221F8FE09B00DDE8F2 /* RegisterController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

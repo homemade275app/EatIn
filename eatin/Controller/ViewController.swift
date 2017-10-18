@@ -18,10 +18,8 @@ class ViewController: UITabBarController {
         if(Auth.auth().currentUser?.uid == nil) {
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
         }
-        
+    
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
-        
-        handleTabs()
     }
     
     @objc
@@ -38,32 +36,32 @@ class ViewController: UITabBarController {
         present(loginController, animated: true, completion: nil)
     }
     
-    func handleTabs() {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
-        
+
         //setup our custom view controllers
         let exploreController = UINavigationController(rootViewController: ExploreController())
         exploreController.tabBarItem.title = "Explore"
-        exploreController.tabBarItem.image = UIImage(named: "explore")
-        
+        //exploreController.tabBarItem.image = UIImage(named: "explore")
+
         let categoryController = UINavigationController(rootViewController: CategoryController())
         categoryController.tabBarItem.title = "Categories"
-        categoryController.tabBarItem.image = UIImage(named: "category")
-        
+        //categoryController.tabBarItem.image = UIImage(named: "category")
+
         let savedController = UINavigationController(rootViewController: SavedController())
         savedController.tabBarItem.title = "Saved"
-        savedController.tabBarItem.image = UIImage(named: "saved")
-        
+        //savedController.tabBarItem.image = UIImage(named: "saved")
+
         let inboxController = UINavigationController(rootViewController: InboxController())
         inboxController.tabBarItem.title = "Inbox"
-        inboxController.tabBarItem.image = UIImage(named: "inbox")
-        
+        //inboxController.tabBarItem.image = UIImage(named: "inbox")
+
         let profileController = UINavigationController(rootViewController: ProfileController())
         profileController.tabBarItem.title = "Profile"
-        profileController.tabBarItem.image = UIImage(named: "profile")
-        
+        //profileController.tabBarItem.image = UIImage(named: "profile")
+
         viewControllers = [exploreController, categoryController, savedController, inboxController, profileController]
-        
+
     }
 }
 

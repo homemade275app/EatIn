@@ -14,5 +14,7 @@ class SavedController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
+        
+        self.title = "Saved"
     }
 }

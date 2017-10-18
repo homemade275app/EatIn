@@ -69,16 +69,13 @@ class LoginController: UIViewController {
             let ref = Database.database().reference()
             let usersReference = ref.child("users").child(uid)
             let values = ["name": name, "email": email]
+            
             usersReference.updateChildValues(values as Any as! [AnyHashable : Any], withCompletionBlock: { (err, ref) in
                 
                 if let err = err {
                     print(err)
                     return
                 }
-                
-                //let registerController = RegisterController()
-                
-                //self.present(registerController, animated: true, completion: nil)
                 
                 self.dismiss(animated: true, completion: nil)
             })
@@ -148,9 +145,11 @@ class LoginController: UIViewController {
     
     @objc
     func handleLoginRegisterChange() {
-        let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
-        loginRegisterButton.setTitle(title, for: UIControlState())
-        
+        if loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex) == "Register" {
+            loginRegisterButton.setTitle("Register", for: UIControlState())
+        } else {
+            loginRegisterButton.setTitle("Login", for: UIControlState())
+        }
         // change height of inputContainerView, but how???
         inputsContainerViewHeightAnchor?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 150
         
