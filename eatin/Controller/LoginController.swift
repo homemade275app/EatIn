@@ -44,6 +44,14 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate {
     var nameTextFieldHeightAnchor: NSLayoutConstraint?
     var emailTextFieldHeightAnchor: NSLayoutConstraint?
     var passwordTextFieldHeightAnchor: NSLayoutConstraint?
+    var facebookHeightAnchor: NSLayoutConstraint?
+    
+    
+    let loginButton : FBSDKLoginButton = {
+        let loginButton = FBSDKLoginButton()
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        return loginButton
+    }()
     
     let inputsContainerView: UIView = {
         let view = UIView()
@@ -162,6 +170,13 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate {
         return tf
     }()
     
+    let facebookSeparatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(r: 220, g: 220, b: 220)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var loginRegisterSegmentedControl: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Login", "Register"])
         sc.translatesAutoresizingMaskIntoConstraints = false
@@ -204,15 +219,12 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate {
         view.addSubview(inputsContainerView)
         view.addSubview(loginRegisterButton)
         view.addSubview(loginRegisterSegmentedControl)
+        view.addSubview(loginButton)
         
         setupInputsContainerView()
         setupLoginRegisterButton()
         setupLoginRegisterSegmentedControl()
-        
-        let loginButton = FBSDKLoginButton()
-        view.addSubview(loginButton)
-        loginButton.frame = CGRect(x: 16, y: 525, width: view.frame.width - 32, height: 50)
-        loginButton.delegate = self
+        setupFacebookLogin()
     }
     
     func setupLoginRegisterSegmentedControl() {
@@ -231,11 +243,17 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate {
         inputsContainerViewHeightAnchor = inputsContainerView.heightAnchor.constraint(equalToConstant: 150)
         inputsContainerViewHeightAnchor?.isActive = true
         
+        inputsContainerView.addSubview(facebookSeparatorView)
         inputsContainerView.addSubview(nameTextField)
         inputsContainerView.addSubview(nameSeparatorView)
         inputsContainerView.addSubview(emailTextField)
         inputsContainerView.addSubview(emailSeparatorView)
         inputsContainerView.addSubview(passwordTextField)
+        
+        facebookSeparatorView.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor).isActive = true
+        facebookSeparatorView.topAnchor.constraint(equalTo: loginButton.bottomAnchor).isActive = true
+        facebookSeparatorView.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
+        facebookSeparatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
         //need x, y, width, height constraints
         nameTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
@@ -282,6 +300,16 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate {
         loginRegisterButton.topAnchor.constraint(equalTo: inputsContainerView.bottomAnchor, constant: 12).isActive = true
         loginRegisterButton.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
         loginRegisterButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    func setupFacebookLogin() {
+        //loginButton.frame = CGRect(x: 16, y: 525, width: view.frame.width - 32, height: 50)
+        loginButton.delegate = self
+        
+        loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loginButton.topAnchor.constraint(equalTo: loginRegisterButton.bottomAnchor, constant: 12).isActive = true
+        loginButton.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
+        loginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 }
 
