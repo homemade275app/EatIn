@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2935CE6AC3C9E8D1623312AC /* Pods_eatin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B464000F9D44D8DFE1057A03 /* Pods_eatin.framework */; };
+		379F76E5CB188E8CD8A8371C /* Pods_eatin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 686F2035FEAEED40B82E2812 /* Pods_eatin.framework */; };
 		426FCC181F8FDF2B00DDE8F2 /* ExploreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426FCC171F8FDF2B00DDE8F2 /* ExploreController.swift */; };
 		426FCC1A1F8FDF4B00DDE8F2 /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426FCC191F8FDF4B00DDE8F2 /* CategoryController.swift */; };
 		426FCC1C1F8FDF9900DDE8F2 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426FCC1B1F8FDF9900DDE8F2 /* ProfileController.swift */; };
@@ -20,6 +20,9 @@
 		428FBCD61F8E917F004E82DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 428FBCD41F8E917F004E82DE /* LaunchScreen.storyboard */; };
 		428FBCE21F8E96F4004E82DE /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428FBCE11F8E96F4004E82DE /* LoginController.swift */; };
 		428FBCE31F8EA3E2004E82DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 428FBCDD1F8E92B0004E82DE /* GoogleService-Info.plist */; };
+		42DD64211F984D2D007487B9 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42DD64241F984D2E007487B9 /* FBSDKCoreKit.framework */; };
+		42DD64221F984D2E007487B9 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42DD64251F984D2E007487B9 /* FBSDKLoginKit.framework */; };
+		42DD64231F984D2E007487B9 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42DD64261F984D2E007487B9 /* FBSDKShareKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,8 +41,11 @@
 		428FBCD71F8E917F004E82DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		428FBCDD1F8E92B0004E82DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		428FBCE11F8E96F4004E82DE /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		42DD64241F984D2E007487B9 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42DD64251F984D2E007487B9 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42DD64261F984D2E007487B9 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		686F2035FEAEED40B82E2812 /* Pods_eatin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eatin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		860F9A01FDCB9B7D872F6020 /* Pods-eatin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eatin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eatin/Pods-eatin.debug.xcconfig"; sourceTree = "<group>"; };
-		B464000F9D44D8DFE1057A03 /* Pods_eatin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eatin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +53,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2935CE6AC3C9E8D1623312AC /* Pods_eatin.framework in Frameworks */,
+				42DD64211F984D2D007487B9 /* FBSDKCoreKit.framework in Frameworks */,
+				42DD64221F984D2E007487B9 /* FBSDKLoginKit.framework in Frameworks */,
+				42DD64231F984D2E007487B9 /* FBSDKShareKit.framework in Frameworks */,
+				379F76E5CB188E8CD8A8371C /* Pods_eatin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +112,10 @@
 		E4CE50F0DF394369E8EAB3B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B464000F9D44D8DFE1057A03 /* Pods_eatin.framework */,
+				42DD64241F984D2E007487B9 /* FBSDKCoreKit.framework */,
+				42DD64251F984D2E007487B9 /* FBSDKLoginKit.framework */,
+				42DD64261F984D2E007487B9 /* FBSDKShareKit.framework */,
+				686F2035FEAEED40B82E2812 /* Pods_eatin.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -196,6 +208,10 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-eatin/Pods-eatin-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -203,6 +219,10 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -237,9 +257,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-eatin/Pods-eatin-resources.sh",
+				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -399,10 +422,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = eatin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eatin.eatin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -414,10 +442,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = eatin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eatin.eatin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

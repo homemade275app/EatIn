@@ -18,8 +18,6 @@ class ViewController: UITabBarController {
         if(Auth.auth().currentUser?.uid == nil) {
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
         }
-    
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
     }
     
     @objc
@@ -38,7 +36,7 @@ class ViewController: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
-
+        
         //setup our custom view controllers
         let exploreController = UINavigationController(rootViewController: ExploreController())
         exploreController.tabBarItem.title = "Explore"
@@ -62,6 +60,23 @@ class ViewController: UITabBarController {
 
         viewControllers = [exploreController, categoryController, savedController, inboxController, profileController]
 
+    }
+    
+    func getCurrentUserInfo() {
+        
+        let ref = Database.database().reference()
+        
+        let userID = Auth.auth().currentUser?.uid
+        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            let username = value?["name"] as? String ?? ""
+            
+            //self.navigationItem.title = username
+            
+            // ...
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
 }
 

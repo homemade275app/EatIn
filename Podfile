@@ -5,8 +5,12 @@ target 'eatin' do
 
 use_frameworks!
 
+pod 'Bolts'
 pod 'Firebase'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
+pod 'FBSDKCoreKit'
+pod 'FBSDKShareKit'
+pod 'FBSDKLoginKit'
 
 end

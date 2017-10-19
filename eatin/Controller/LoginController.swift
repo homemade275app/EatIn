@@ -8,9 +8,37 @@
 
 import UIKit
 import Firebase
-import FirebaseAuth
+import FBSDKLoginKit
 
-class LoginController: UIViewController {
+class LoginController: UIViewController, FBSDKLoginButtonDelegate {
+    
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if(error != nil) {
+            print("Error")
+            return
+        }
+        
+        let accessToken = FBSDKAccessToken.current()
+        guard let tokenString = accessToken?.tokenString else {return}
+        
+        let credentials = FacebookAuthProvider.credential(withAccessToken: tokenString)
+        
+        Auth.auth().signIn(with: credentials, completion: { (user,
+             error) in
+            if error != nil {
+                print("FB User error: ", error ?? "")
+                return
+            }
+            print("Successfully logged in with user ", user ?? "")
+            
+            self.dismiss(animated: true, completion: nil)
+        })
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        print("Facebook Logout")
+    }
+    
     
     var inputsContainerViewHeightAnchor: NSLayoutConstraint?
     var nameTextFieldHeightAnchor: NSLayoutConstraint?
@@ -180,6 +208,11 @@ class LoginController: UIViewController {
         setupInputsContainerView()
         setupLoginRegisterButton()
         setupLoginRegisterSegmentedControl()
+        
+        let loginButton = FBSDKLoginButton()
+        view.addSubview(loginButton)
+        loginButton.frame = CGRect(x: 16, y: 525, width: view.frame.width - 32, height: 50)
+        loginButton.delegate = self
     }
     
     func setupLoginRegisterSegmentedControl() {

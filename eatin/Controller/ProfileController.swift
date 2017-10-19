@@ -7,14 +7,30 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class ProfileController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
-        
         self.title = "Profile"
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
+    }
+    
+    @objc
+    func handleLogout() {
+        
+        do {
+            try Auth.auth().signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
+        
+        let loginController = LoginController()
+        
+        present(loginController, animated: true, completion: nil)
     }
 }

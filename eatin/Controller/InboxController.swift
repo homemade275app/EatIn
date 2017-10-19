@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class InboxController: UIViewController {
     
@@ -16,5 +18,21 @@ class InboxController: UIViewController {
         view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
         
         self.title = "Inbox"
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
+    }
+
+    @objc
+    func handleLogout() {
+        
+        do {
+            try Auth.auth().signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
+        
+        let loginController = LoginController()
+        
+        present(loginController, animated: true, completion: nil)
     }
 }
