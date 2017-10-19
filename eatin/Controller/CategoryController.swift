@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FBSDKLoginKit
 
 class CategoryController: UIViewController {
     
@@ -29,6 +30,11 @@ class CategoryController: UIViewController {
             try Auth.auth().signOut()
         } catch let logoutError {
             print(logoutError)
+        }
+        
+        if(FBSDKAccessToken.current() != nil) {
+            let loginManager = FBSDKLoginManager()
+            loginManager.logOut()
         }
         
         let loginController = LoginController()
