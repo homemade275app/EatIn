@@ -37,8 +37,8 @@ class CategoryController: UIViewController {
             loginManager.logOut()
         }
         
-        let loginController = LoginController()
+        let introController = IntroController()
         
-        present(loginController, animated: true, completion: nil)
+        present(introController, animated: true, completion: nil)
     }
 }

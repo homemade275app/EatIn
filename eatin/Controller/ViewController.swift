@@ -29,9 +29,9 @@ class ViewController: UITabBarController {
             print(logoutError)
         }
         
-        let loginController = LoginController()
+        let introController = IntroController()
         
-        present(loginController, animated: true, completion: nil)
+        present(introController, animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,23 +60,6 @@ class ViewController: UITabBarController {
 
         viewControllers = [exploreController, categoryController, savedController, inboxController, profileController]
 
-    }
-    
-    func getCurrentUserInfo() {
-        
-        let ref = Database.database().reference()
-        
-        let userID = Auth.auth().currentUser?.uid
-        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            let username = value?["name"] as? String ?? ""
-            
-            //self.navigationItem.title = username
-            
-            // ...
-        }) { (error) in
-            print(error.localizedDescription)
-        }
     }
 }
 
