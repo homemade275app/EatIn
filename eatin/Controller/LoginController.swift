@@ -65,13 +65,37 @@ class LoginController: UIViewController {
         let password = passwordTextField.text
         let name = nameTextField.text
         
+        if(name == "" || name == nil) {
+            let alert = UIAlertController(title: "Error", message: "Must Enter Name", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Continue", style: .default))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
         Auth.auth().createUser(withEmail: email!, password: password!) { (user, error) in
             
-            if let error = error {
-                print(error)
+            if(error != nil) {
+                if let errCode = AuthErrorCode(rawValue: error!._code) {
+                    switch errCode {
+                    case .invalidEmail:
+                        let alert = UIAlertController(title: "Error", message: "Invalid Email", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Continue", style: .default))
+                        self.present(alert, animated: true, completion: nil)
+                    case .emailAlreadyInUse:
+                        let alert = UIAlertController(title: "Error", message: "Email already in use", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Continue", style: .default))
+                        self.present(alert, animated: true, completion: nil)
+                    case .weakPassword:
+                        let alert = UIAlertController(title: "Error", message: "Password is too weak", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Continue", style: .default))
+                        self.present(alert, animated: true, completion: nil)
+                    default:
+                        print("Create User Error: \(error!)")
+                    }
+                }
                 return
             }
-            
+                
             guard let uid = user?.uid else {
                 return
             }
@@ -79,7 +103,7 @@ class LoginController: UIViewController {
             //successfully authenticated user
             let ref = Database.database().reference()
             let usersReference = ref.child("users").child(uid)
-            let values = ["name": name, "email": email]
+            let values = ["name": name, "email": email, "address": "", "city": "", "state": "", "country": "", "zip": "", "phoneNumber": "", "chefStatus": "0"]
             
             usersReference.updateChildValues(values as Any as! [AnyHashable : Any], withCompletionBlock: { (err, ref) in
                 
@@ -100,8 +124,21 @@ class LoginController: UIViewController {
         
         Auth.auth().signIn(withEmail: email!, password: password!) { (user, error) in
             
-            if let error = error {
-                print(error)
+            if(error != nil) {
+                if let errCode = AuthErrorCode(rawValue: error!._code) {
+                    switch errCode {
+                    case .invalidEmail:
+                        let alert = UIAlertController(title: "Error", message: "Invalid Email or Password", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Continue", style: .default))
+                        self.present(alert, animated: true, completion: nil)
+                    case .wrongPassword:
+                        let alert = UIAlertController(title: "Error", message: "Invalid Email or Password", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Continue", style: .default))
+                        self.present(alert, animated: true, completion: nil)
+                    default:
+                        print("Create User Error: \(error!)")
+                    }
+                }
                 return
             }
             

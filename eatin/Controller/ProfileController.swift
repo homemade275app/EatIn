@@ -114,32 +114,32 @@ class ProfileController: UIViewController {
         profileButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         profileButton.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 12).isActive = true
         profileButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        profileButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        profileButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
         
         notificationsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         notificationsButton.topAnchor.constraint(equalTo: profileButton.bottomAnchor, constant: 12).isActive = true
         notificationsButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        notificationsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        notificationsButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
         
         becomeAChefButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         becomeAChefButton.topAnchor.constraint(equalTo: notificationsButton.bottomAnchor, constant: 12).isActive = true
         becomeAChefButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        becomeAChefButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        becomeAChefButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
         
         feedbackButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         feedbackButton.topAnchor.constraint(equalTo: becomeAChefButton.bottomAnchor, constant: 12).isActive = true
         feedbackButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        feedbackButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        feedbackButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
         
         helpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         helpButton.topAnchor.constraint(equalTo: feedbackButton.bottomAnchor, constant: 12).isActive = true
         helpButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        helpButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        helpButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
         
         settingsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         settingsButton.topAnchor.constraint(equalTo: helpButton.bottomAnchor, constant: 12).isActive = true
         settingsButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        settingsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        settingsButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
     }
     
     @objc func profileButtonAction(sender: UIButton!) {

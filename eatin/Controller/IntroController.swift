@@ -41,7 +41,8 @@ class IntroController: UIViewController, FBSDKLoginButtonDelegate {
             //successfully authenticated user
             let ref = Database.database().reference()
             let usersReference = ref.child("users").child(uid)
-            let values = ["name": user?.displayName, "email": user?.email]
+            
+            let values = ["name": user?.displayName, "email": user?.email, "address": "", "city": "", "state": "", "country": "", "zip": "", "phoneNumber": "", "chefStatus": "0"]
             
             usersReference.updateChildValues(values as Any as! [AnyHashable : Any], withCompletionBlock: { (err, ref) in
                 
@@ -67,6 +68,7 @@ class IntroController: UIViewController, FBSDKLoginButtonDelegate {
                 facebookButton.removeConstraint(const)
             }
         }
+        facebookButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         return facebookButton
     }()
     
