@@ -11,7 +11,6 @@ import Firebase
 
 class UserProfileController: UIViewController {
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,19 +18,19 @@ class UserProfileController: UIViewController {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Return", style: .plain, target: self, action: #selector(handleReturn))
         
-        getCurrentUserInfo()
-        
+        getUserInfo()
     }
     
     @objc
     func handleReturn() {
         self.dismiss(animated: true, completion: nil)
     }
-    func getCurrentUserInfo() {
-        
+    
+    func getUserInfo() {
         let ref = Database.database().reference()
         
         let userID = Auth.auth().currentUser?.uid
+        
         ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             let username = value?["name"] as? String ?? "Profile"

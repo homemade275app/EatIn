@@ -15,6 +15,11 @@ class IntroController: UIViewController, FBSDKLoginButtonDelegate {
     var facebookHeightAnchor: NSLayoutConstraint?
     var loginCreateButtonAnchor: NSLayoutConstraint?
     
+    let imageView : UIImageView = {
+        let homeImage = UIImage(named: "home")
+        return UIImageView(image: homeImage)
+    }()
+    
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if(error != nil) {
             print("Error")
@@ -40,19 +45,27 @@ class IntroController: UIViewController, FBSDKLoginButtonDelegate {
             
             //successfully authenticated user
             let ref = Database.database().reference()
-            let usersReference = ref.child("users").child(uid)
             
-            let values = ["name": user?.displayName, "email": user?.email, "address": "", "city": "", "state": "", "country": "", "zip": "", "phoneNumber": "", "chefStatus": "0"]
-            
-            usersReference.updateChildValues(values as Any as! [AnyHashable : Any], withCompletionBlock: { (err, ref) in
-                
-                if let err = err {
-                    print(err)
-                    return
+            ref.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
+                if snapshot.hasChild(uid){
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    let usersReference = ref.child("users").child(uid)
+                    let values = ["name": user?.displayName ?? "", "email": user?.email ?? "", "address": "", "city": "", "state": "", "country": "", "zip": "", "phoneNumber": user?.phoneNumber ?? "", "chefStatus": "0"]
+                    
+                    usersReference.updateChildValues(values as Any as! [AnyHashable : Any], withCompletionBlock: { (err, ref) in
+                        
+                        if let err = err {
+                            print(err)
+                            return
+                        }
+                        
+                        self.dismiss(animated: true, completion: nil)
+                    })
                 }
-            
-                self.dismiss(animated: true, completion: nil)
             })
+            
+            
         })
     }
     
@@ -90,9 +103,18 @@ class IntroController: UIViewController, FBSDKLoginButtonDelegate {
         
         view.addSubview(facebookButton)
         view.addSubview(loginCreateButton)
+        view.addSubview(imageView)
         
         setupFacebookLogin()
         setupLoginButton()
+        setupImage()
+    }
+    
+    func setupImage() {
+        imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        //imageView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        imageView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 12).isActive = true
     }
     
     func setupFacebookLogin() {

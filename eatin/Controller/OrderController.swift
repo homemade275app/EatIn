@@ -11,14 +11,14 @@ import Firebase
 import FirebaseAuth
 import FBSDKLoginKit
 
-class SavedController: UIViewController {
+class OrderController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
         
-        self.title = "Saved"
+        self.title = "Orders"
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
     }

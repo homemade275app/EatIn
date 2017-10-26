@@ -10,8 +10,9 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FBSDKLoginKit
+import MessageUI
 
-class ProfileController: UIViewController {
+class ProfileController: UIViewController, MFMailComposeViewControllerDelegate {
     
     let profileButton: UIButton = {
         let profileButton = UIButton()
@@ -46,9 +47,7 @@ class ProfileController: UIViewController {
         becomeAChefButton.layer.borderWidth = 2
         becomeAChefButton.translatesAutoresizingMaskIntoConstraints = false
         becomeAChefButton.layer.borderColor = UIColor.orange.cgColor
-        becomeAChefButton.setTitle("Become A Chef", for: .normal)
         becomeAChefButton.setTitleColor(UIColor.orange, for: .normal)
-        becomeAChefButton.addTarget(self, action: #selector(becomeAChefButtonAction), for: .touchUpInside)
         return becomeAChefButton
     }()
     
@@ -91,6 +90,15 @@ class ProfileController: UIViewController {
         return settingsButton
     }()
     
+    lazy var mail: MFMailComposeViewController = {
+        let mail = MFMailComposeViewController()
+        mail.mailComposeDelegate = self
+        mail.setToRecipients(["noreply@eatin.com"])
+        mail.setSubject("Feedback")
+        mail.setMessageBody("<p></p>", isHTML: true)
+        return mail
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -111,6 +119,7 @@ class ProfileController: UIViewController {
     }
     
     func addProfileButtons() {
+
         profileButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         profileButton.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 12).isActive = true
         profileButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
@@ -127,7 +136,7 @@ class ProfileController: UIViewController {
         becomeAChefButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
         
         feedbackButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        feedbackButton.topAnchor.constraint(equalTo: becomeAChefButton.bottomAnchor, constant: 12).isActive = true
+        feedbackButton.topAnchor.constraint(equalTo: notificationsButton.bottomAnchor, constant: 12).isActive = true
         feedbackButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         feedbackButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
         
@@ -158,17 +167,21 @@ class ProfileController: UIViewController {
     }
     
     @objc func feedbackButtonAction(sender: UIButton!) {
-        let feedbackController = UINavigationController(rootViewController: FeedbackController())
-        present(feedbackController, animated: true, completion: nil)
+        if MFMailComposeViewController.canSendMail() {
+            present(mail, animated: true)
+        } else {
+            print("Device cannot send mail")
+        }
     }
     
-    
-    @objc func helpButtonAction(sender: UIButton!) {
+    @objc
+    func helpButtonAction(sender: UIButton!) {
         let helpController = UINavigationController(rootViewController: HelpController())
         present(helpController, animated: true, completion: nil)
     }
     
-    @objc func settingsButtonAction(sender: UIButton!) {
+    @objc
+    func settingsButtonAction(sender: UIButton!) {
         let settingsController = UINavigationController(rootViewController: SettingsController())
         present(settingsController, animated: true, completion: nil)
     }

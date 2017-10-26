@@ -12,17 +12,72 @@ import FirebaseAuth
 
 class ViewController: UITabBarController {
     
+    var pageList : [UINavigationController] = []
+    
+    var set = 0;
+    
+    fileprivate lazy var defaultTabBarHeight = { tabBar.frame.size.height }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupTabs()
+        
         if(Auth.auth().currentUser?.uid == nil) {
+            set = 0
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
+        }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        let newTabBarHeight = defaultTabBarHeight + 20.0
+        
+        var newFrame = tabBar.frame
+        newFrame.size.height = newTabBarHeight
+        newFrame.origin.y = view.frame.size.height - newTabBarHeight
+        
+        tabBar.frame = newFrame
+    }
+    
+    func setupTabs() {
+        let exploreController = UINavigationController(rootViewController: ExploreController())
+        exploreController.tabBarItem.title = "Explore"
+        exploreController.tabBarItem.image = UIImage(named: "explore")
+        pageList.append(exploreController)
+        
+        let categoryController = UINavigationController(rootViewController: CategoryController())
+        categoryController.tabBarItem.title = "Categories"
+        categoryController.tabBarItem.image = UIImage(named: "categories")
+        pageList.append(categoryController)
+        
+        pageList.append(UINavigationController())
+        
+        let inboxController = UINavigationController(rootViewController: InboxController())
+        inboxController.tabBarItem.title = "Inbox"
+        inboxController.tabBarItem.image = UIImage(named: "inbox")
+        pageList.append(inboxController)
+        
+        let profileController = UINavigationController(rootViewController: ProfileController())
+        profileController.tabBarItem.title = "Profile"
+        profileController.tabBarItem.image = UIImage(named: "profile")
+        pageList.append(profileController)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let userID = Auth.auth().currentUser?.uid
+        
+        if(set == 0 || userID != nil) {
+            getChefPage()
+            set = 1
         }
     }
     
     @objc
     func handleLogout() {
-        
         do {
             try Auth.auth().signOut()
         } catch let logoutError {
@@ -34,32 +89,31 @@ class ViewController: UITabBarController {
         present(introController, animated: true, completion: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewDidLoad()
+    func getChefPage(){
         
-        //setup our custom view controllers
-        let exploreController = UINavigationController(rootViewController: ExploreController())
-        exploreController.tabBarItem.title = "Explore"
-        //exploreController.tabBarItem.image = UIImage(named: "explore")
-
-        let categoryController = UINavigationController(rootViewController: CategoryController())
-        categoryController.tabBarItem.title = "Categories"
-        //categoryController.tabBarItem.image = UIImage(named: "category")
-
-        let savedController = UINavigationController(rootViewController: SavedController())
-        savedController.tabBarItem.title = "Saved"
-        //savedController.tabBarItem.image = UIImage(named: "saved")
-
-        let inboxController = UINavigationController(rootViewController: InboxController())
-        inboxController.tabBarItem.title = "Inbox"
-        //inboxController.tabBarItem.image = UIImage(named: "inbox")
-
-        let profileController = UINavigationController(rootViewController: ProfileController())
-        profileController.tabBarItem.title = "Profile"
-        //profileController.tabBarItem.image = UIImage(named: "profile")
-
-        viewControllers = [exploreController, categoryController, savedController, inboxController, profileController]
-
+        let ref = Database.database().reference()
+        let userID = Auth.auth().currentUser?.uid
+        if(userID != nil) {
+            ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                let chefStatus = value?["chefStatus"] as? String ?? "0"
+                if(chefStatus == "1") {
+                    let chefMenuController = UINavigationController(rootViewController: ChefMenuController())
+                    chefMenuController.tabBarItem.title = "Your Menu"
+                    chefMenuController.tabBarItem.image = UIImage(named: "orders")
+                    self.pageList[2] = (chefMenuController)
+                } else {
+                    let becomeAChefController = UINavigationController(rootViewController: BecomeAChefController())
+                    becomeAChefController.tabBarItem.title = "Become A Chef"
+                    becomeAChefController.tabBarItem.image = UIImage(named: "orders")
+                    self.pageList[2] = (becomeAChefController)
+                }
+                self.viewControllers = nil
+                self.viewControllers = self.pageList
+            }) { (error) in
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
