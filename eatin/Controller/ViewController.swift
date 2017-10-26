@@ -42,7 +42,8 @@ class ViewController: UITabBarController {
     }
     
     func setupTabs() {
-        let exploreController = UINavigationController(rootViewController: ExploreController())
+        let feedController = ExploreController(collectionViewLayout: UICollectionViewFlowLayout())
+        let exploreController = UINavigationController(rootViewController: feedController)
         exploreController.tabBarItem.title = "Explore"
         exploreController.tabBarItem.image = UIImage(named: "explore")
         pageList.append(exploreController)
