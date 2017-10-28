@@ -40,7 +40,13 @@ class ExploreController: UICollectionViewController, UICollectionViewDelegateFlo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 300)
+        return CGSize(width: view.frame.width, height: 400)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        collectionView?.collectionViewLayout.invalidateLayout()
     }
     
     @objc
@@ -81,13 +87,13 @@ class FeedCell: UICollectionViewCell {
         let attributedText = NSMutableAttributedString(string: "I am Goat  ", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
         
         let attachment = NSTextAttachment()
-        attachment.image = UIImage(named: "saved")
+        attachment.image = UIImage(named: "orders")
         attachment.bounds = CGRect(x: 0, y: -2, width: 12, height: 12)
         attributedText.append(NSAttributedString(attachment: attachment))
         attributedText.append(NSAttributedString(attachment: attachment))
         attributedText.append(NSAttributedString(attachment: attachment))
         
-        attributedText.append(NSAttributedString(string: "\nOctober 25th * Burlington VT * ", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor.gray]))
+        attributedText.append(NSAttributedString(string: "\nOctober 25th * Burlington VT * ", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor.rgb(155, green: 161, blue: 161)]))
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 4
@@ -120,12 +126,49 @@ class FeedCell: UICollectionViewCell {
         return imageView
     }()
     
+    let likesCommentsLabel: UILabel = {
+        let label = UILabel()
+        label.text = " 500 Likes    14 Comments"
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = UIColor.rgb(155, green: 161, blue: 171)
+        return label
+    }()
+    
+    let dividerLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.rgb(226, green: 228, blue: 232)
+        return view
+    }()
+    
+    let orderButton = FeedCell.buttonForTitle("Order", imageName: "categories")
+    let connectButton: UIButton = FeedCell.buttonForTitle("Connect", imageName: "inbox")
+    let shareButton: UIButton = FeedCell.buttonForTitle("Share", imageName: "profile")
+    
+    static func buttonForTitle(_ title: String, imageName: String) -> UIButton {
+        let button = UIButton()
+        button.setTitle(title, for: UIControlState())
+        button.setTitleColor(UIColor.rgb(143, green: 150, blue: 163), for: UIControlState())
+        
+        button.setImage(UIImage(named: imageName), for: UIControlState())
+        button.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0)
+        
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        
+        return button
+    }
+    
     func setupViews() {
         backgroundColor = UIColor.white
         addSubview(nameLabel)
         addSubview(profileImageView)
         addSubview(statusTextView)
         addSubview(statusImageView)
+        addSubview(likesCommentsLabel)
+        addSubview(dividerLineView)
+        
+        addSubview(orderButton)
+        addSubview(connectButton)
+        addSubview(shareButton)
         
         addConstraintsWithFormat("H:|-8-[v0(44)]-8-[v1]|", views: profileImageView, nameLabel)
         
@@ -133,9 +176,18 @@ class FeedCell: UICollectionViewCell {
         
         addConstraintsWithFormat("H:|[v0]|", views: statusImageView)
         
+        addConstraintsWithFormat("H:|-12-[v0]", views: likesCommentsLabel)
+        
+        addConstraintsWithFormat("H:|-12-[v0]-12-|", views: dividerLineView)
+        
+        addConstraintsWithFormat("H:|[v0(v2)][v1(v2)][v2]|", views: orderButton, connectButton, shareButton)
+        
         addConstraintsWithFormat("V:|-12-[v0]", views: nameLabel)
         
-        addConstraintsWithFormat("V:|-8-[v0(44)]-4-[v1(30)]-4-[v2]|", views: profileImageView, statusTextView, statusImageView)
+        addConstraintsWithFormat("V:|-8-[v0(44)]-4-[v1]-4-[v2(200)]-8-[v3(24)]-8-[v4(0.4)][v5(44)]|", views: profileImageView, statusTextView, statusImageView, likesCommentsLabel, dividerLineView, orderButton)
+        
+        addConstraintsWithFormat("V:[v0(44)]|", views: connectButton)
+        addConstraintsWithFormat("V:[v0(44)]|", views: shareButton)
         
     }
     
@@ -152,6 +204,14 @@ extension UIView {
         }
         
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+    }
+    
+}
+
+extension UIColor {
+    
+    static func rgb(_ red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
+        return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
     }
     
 }
