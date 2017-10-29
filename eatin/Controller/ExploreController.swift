@@ -13,10 +13,37 @@ import FBSDKLoginKit
 
 let cellId = "cellId"
 
+class Post {
+    var name: String?
+    var profileImageName: String?
+    var rating: Int?
+    var statusText: String?
+    var statusImageName: String?
+}
+
 class ExploreController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    var posts = [Post]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let postGoat = Post()
+        postGoat.name = "Goat McGoat"
+        postGoat.statusText = "Come get your grass, best grass"
+        postGoat.profileImageName = "goat"
+        postGoat.rating = 3
+        postGoat.statusImageName = "grass"
+        
+        let postSheep = Post()
+        postSheep.name = "Sheep mcSheep"
+        postSheep.statusText = "BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA"
+        postSheep.profileImageName = "sheep"
+        postSheep.rating = 4
+        postSheep.statusImageName = "grass2"
+        
+        posts.append(postGoat)
+        posts.append(postSheep)
         
         view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
         
@@ -32,15 +59,29 @@ class ExploreController: UICollectionViewController, UICollectionViewDelegateFlo
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let feedCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FeedCell
+        
+        feedCell.post = posts[indexPath.item]
+        
+        return feedCell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 400)
+        
+        if let statusText = posts[indexPath.item].statusText {
+            
+            let rect = NSString(string: statusText).boundingRect(with: CGSize(width: view.frame.width, height: 1000), options: NSStringDrawingOptions.usesFontLeading.union(NSStringDrawingOptions.usesLineFragmentOrigin), attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)], context: nil)
+            
+            let knownHeight: CGFloat = 8 + 44 + 4 + 4 + 200 + 8 + 24 + 8 + 44
+            
+            return CGSize(width: view.frame.width, height: rect.height + knownHeight + 24)
+        }
+        
+        return CGSize(width: view.frame.width, height: 500)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -70,6 +111,51 @@ class ExploreController: UICollectionViewController, UICollectionViewDelegateFlo
 }
 
 class FeedCell: UICollectionViewCell {
+    
+    var post: Post? {
+        didSet {
+            
+            if let name = post?.name {
+                
+                let attributedText = NSMutableAttributedString(string: name + " ", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
+                
+                var rating = 0
+                
+                if let ratingNum = post?.rating {
+                    rating = ratingNum
+                }
+                
+                let attachment = NSTextAttachment()
+                attachment.image = UIImage(named: "orders")
+                attachment.bounds = CGRect(x: 0, y: -2, width: 12, height: 12)
+                for _ in 1...rating {
+                    attributedText.append(NSAttributedString(attachment: attachment))
+                }
+                attributedText.append(NSAttributedString(string: "\nOctober 25th * Burlington VT * ", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor.rgb(155, green: 161, blue: 161)]))
+                
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.lineSpacing = 4
+                
+                attributedText.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedText.string.characters.count))
+                
+                nameLabel.attributedText = attributedText
+            }
+            
+            if let statusText = post?.statusText {
+                statusTextView.text = statusText
+            }
+            
+            if let profileImagename = post?.profileImageName {
+                profileImageView.image = UIImage(named: profileImagename)
+            }
+            
+            if let statusImageName = post?.statusImageName {
+                statusImageView.image = UIImage(named: statusImageName)
+            }
+            
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -84,23 +170,7 @@ class FeedCell: UICollectionViewCell {
         let label = UILabel()
         label.numberOfLines = 2
         
-        let attributedText = NSMutableAttributedString(string: "I am Goat  ", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
-        
-        let attachment = NSTextAttachment()
-        attachment.image = UIImage(named: "orders")
-        attachment.bounds = CGRect(x: 0, y: -2, width: 12, height: 12)
-        attributedText.append(NSAttributedString(attachment: attachment))
-        attributedText.append(NSAttributedString(attachment: attachment))
-        attributedText.append(NSAttributedString(attachment: attachment))
-        
-        attributedText.append(NSAttributedString(string: "\nOctober 25th * Burlington VT * ", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor.rgb(155, green: 161, blue: 161)]))
-        
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 4
-        
-        attributedText.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedText.string.characters.count))
-        
-        label.attributedText = attributedText
+
         return label
     }()
     
@@ -115,6 +185,7 @@ class FeedCell: UICollectionViewCell {
         let textView = UITextView()
         textView.text = "I make the best grass in town"
         textView.font = UIFont.systemFont(ofSize: 14)
+        textView.isScrollEnabled = false
         return textView
     }()
     
