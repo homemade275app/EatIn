@@ -18,9 +18,30 @@ class InboxController: UIViewController {
         
         view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
         
-        self.title = "Inbox"
+        //self.title = "nn"
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
+        //let image = UIImage(named:"icon")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(handlechatLogController))
+        //navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleNewMessage))
+        
+        let uid = Auth.auth().currentUser?.uid
+        Database.database().reference().child("users").child(uid!).observeSingleEvent(of:.value, with:{ (snapshot) in
+            if let Dictionary = snapshot.value as? [String: AnyObject]{
+                self.title = Dictionary["name"] as? String
+            }}
+            , withCancel: nil)
+    }
+    @objc func handlechatLogController(){
+        let chatcogcontroller = chatlogController(collectionViewLayout: UICollectionViewFlowLayout())
+        let navController = UINavigationController(rootViewController: chatcogcontroller)
+        present(navController,animated: true, completion: nil)
+    }
+    @objc func handleNewMessage(){
+        let newMessageController = NewMessageController()
+        let navController = UINavigationController(rootViewController: newMessageController)
+        present(navController,animated: true, completion: nil)
+
     }
 
     @objc

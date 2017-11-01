@@ -22,12 +22,21 @@ class ViewController: UITabBarController {
         super.viewDidLoad()
         
         setupTabs()
+        checkIfUserIsLoggedIn()
+        
+    }
+    
+    func checkIfUserIsLoggedIn(){
         
         if(Auth.auth().currentUser?.uid == nil) {
             set = 0
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
+        }else {
+            let uid = Auth.auth().currentUser?.uid
+            Database.database().reference().child("Users").child(uid!).observeSingleEvent(of:.value, with:{ (snapshot) in print(snapshot)}, withCancel: nil)
         }
     }
+    
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
