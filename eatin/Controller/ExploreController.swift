@@ -104,7 +104,7 @@ class ExploreController: UICollectionViewController, UICollectionViewDelegateFlo
             loginManager.logOut()
         }
         
-        let introController = IntroController()
+        let introController = InfoController()
         
         present(introController, animated: true, completion: nil)
     }
