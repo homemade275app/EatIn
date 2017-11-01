@@ -16,7 +16,6 @@
 		4243FC461F998ACF00298BC4 /* HelpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243FC451F998ACF00298BC4 /* HelpController.swift */; };
 		4243FC481F998ADD00298BC4 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243FC471F998ADD00298BC4 /* SettingsController.swift */; };
 		426FCC181F8FDF2B00DDE8F2 /* ExploreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426FCC171F8FDF2B00DDE8F2 /* ExploreController.swift */; };
-		426FCC1A1F8FDF4B00DDE8F2 /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426FCC191F8FDF4B00DDE8F2 /* CategoryController.swift */; };
 		426FCC1C1F8FDF9900DDE8F2 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426FCC1B1F8FDF9900DDE8F2 /* ProfileController.swift */; };
 		426FCC1E1F8FDFAA00DDE8F2 /* InboxController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426FCC1D1F8FDFAA00DDE8F2 /* InboxController.swift */; };
 		426FCC201F8FDFC800DDE8F2 /* OrderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426FCC1F1F8FDFC800DDE8F2 /* OrderController.swift */; };
@@ -33,7 +32,7 @@
 		42DD64281F9946EF007487B9 /* IntroController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DD64271F9946EF007487B9 /* IntroController.swift */; };
 		64F0A8B81FA978B3009D57CF /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0A8B71FA978B3009D57CF /* NewMessageController.swift */; };
 		64F0A8BF1FA99804009D57CF /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0A8BE1FA99804009D57CF /* user.swift */; };
-		64F0A8C11FAA317D009D57CF /* chatlogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0A8C01FAA317D009D57CF /* chatlogController.swift */; };
+		64F0A8C11FAA317D009D57CF /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0A8C01FAA317D009D57CF /* ChatLogController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +45,6 @@
 		4243FC451F998ACF00298BC4 /* HelpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpController.swift; sourceTree = "<group>"; };
 		4243FC471F998ADD00298BC4 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		426FCC171F8FDF2B00DDE8F2 /* ExploreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreController.swift; sourceTree = "<group>"; };
-		426FCC191F8FDF4B00DDE8F2 /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
 		426FCC1B1F8FDF9900DDE8F2 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		426FCC1D1F8FDFAA00DDE8F2 /* InboxController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxController.swift; sourceTree = "<group>"; };
 		426FCC1F1F8FDFC800DDE8F2 /* OrderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderController.swift; sourceTree = "<group>"; };
@@ -65,7 +63,7 @@
 		42DD64271F9946EF007487B9 /* IntroController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroController.swift; sourceTree = "<group>"; };
 		64F0A8B71FA978B3009D57CF /* NewMessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
 		64F0A8BE1FA99804009D57CF /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
-		64F0A8C01FAA317D009D57CF /* chatlogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatlogController.swift; sourceTree = "<group>"; };
+		64F0A8C01FAA317D009D57CF /* ChatLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
 		686F2035FEAEED40B82E2812 /* Pods_eatin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eatin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		860F9A01FDCB9B7D872F6020 /* Pods-eatin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eatin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eatin/Pods-eatin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,13 +145,12 @@
 				428FBCCD1F8E917F004E82DE /* ViewController.swift */,
 				428FBCE11F8E96F4004E82DE /* LoginController.swift */,
 				426FCC171F8FDF2B00DDE8F2 /* ExploreController.swift */,
-				426FCC191F8FDF4B00DDE8F2 /* CategoryController.swift */,
 				426FCC1F1F8FDFC800DDE8F2 /* OrderController.swift */,
 				426FCC1D1F8FDFAA00DDE8F2 /* InboxController.swift */,
 				426FCC1B1F8FDF9900DDE8F2 /* ProfileController.swift */,
 				42DD64271F9946EF007487B9 /* IntroController.swift */,
 				64F0A8B71FA978B3009D57CF /* NewMessageController.swift */,
-				64F0A8C01FAA317D009D57CF /* chatlogController.swift */,
+				64F0A8C01FAA317D009D57CF /* ChatLogController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -335,9 +332,8 @@
 			files = (
 				428FBCCE1F8E917F004E82DE /* ViewController.swift in Sources */,
 				426FCC1E1F8FDFAA00DDE8F2 /* InboxController.swift in Sources */,
-				64F0A8C11FAA317D009D57CF /* chatlogController.swift in Sources */,
+				64F0A8C11FAA317D009D57CF /* ChatLogController.swift in Sources */,
 				4224EC1C1F9F9801003B5F11 /* ChefMenuController.swift in Sources */,
-				426FCC1A1F8FDF4B00DDE8F2 /* CategoryController.swift in Sources */,
 				42DD64281F9946EF007487B9 /* IntroController.swift in Sources */,
 				426FCC181F8FDF2B00DDE8F2 /* ExploreController.swift in Sources */,
 				4243FC481F998ADD00298BC4 /* SettingsController.swift in Sources */,

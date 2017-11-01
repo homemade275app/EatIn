@@ -57,11 +57,6 @@ class ViewController: UITabBarController {
         exploreController.tabBarItem.image = UIImage(named: "explore")
         pageList.append(exploreController)
         
-        let categoryController = UINavigationController(rootViewController: CategoryController())
-        categoryController.tabBarItem.title = "Categories"
-        categoryController.tabBarItem.image = UIImage(named: "categories")
-        pageList.append(categoryController)
-        
         pageList.append(UINavigationController())
         
         let inboxController = UINavigationController(rootViewController: InboxController())
@@ -110,13 +105,13 @@ class ViewController: UITabBarController {
                 if(chefStatus == "1") {
                     let chefMenuController = UINavigationController(rootViewController: ChefMenuController())
                     chefMenuController.tabBarItem.title = "Your Menu"
-                    chefMenuController.tabBarItem.image = UIImage(named: "orders")
-                    self.pageList[2] = (chefMenuController)
+                    chefMenuController.tabBarItem.image = UIImage(named: "chef")
+                    self.pageList[1] = (chefMenuController)
                 } else {
                     let becomeAChefController = UINavigationController(rootViewController: BecomeAChefController())
                     becomeAChefController.tabBarItem.title = "Become A Chef"
-                    becomeAChefController.tabBarItem.image = UIImage(named: "orders")
-                    self.pageList[2] = (becomeAChefController)
+                    becomeAChefController.tabBarItem.image = UIImage(named: "chef")
+                    self.pageList[1] = (becomeAChefController)
                 }
                 self.viewControllers = nil
                 self.viewControllers = self.pageList

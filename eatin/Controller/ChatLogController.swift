@@ -22,7 +22,7 @@ class chatlogController: UICollectionViewController{
         super.viewDidLoad()
         navigationItem.title = "New Message"
         collectionView?.backgroundColor = UIColor.white
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel", style: .plain ,target: self, action: #selector(handleCancel))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain ,target: self, action: #selector(handleCancel))
         setupInputComponoent()
         
     }
