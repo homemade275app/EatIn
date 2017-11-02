@@ -26,6 +26,10 @@
 		428FBCD61F8E917F004E82DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 428FBCD41F8E917F004E82DE /* LaunchScreen.storyboard */; };
 		428FBCE21F8E96F4004E82DE /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428FBCE11F8E96F4004E82DE /* LoginController.swift */; };
 		428FBCE31F8EA3E2004E82DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 428FBCDD1F8E92B0004E82DE /* GoogleService-Info.plist */; };
+		4298F95A1FAA56F80069E2CF /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4298F9581FAA56F80069E2CF /* PageCell.swift */; };
+		4298F95B1FAA56F80069E2CF /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4298F9591FAA56F80069E2CF /* Page.swift */; };
+		4298F95D1FAA570C0069E2CF /* InfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4298F95C1FAA570C0069E2CF /* InfoController.swift */; };
+		4298F95F1FAA57B20069E2CF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4298F95E1FAA57B20069E2CF /* Extensions.swift */; };
 		42DD64211F984D2D007487B9 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42DD64241F984D2E007487B9 /* FBSDKCoreKit.framework */; };
 		42DD64221F984D2E007487B9 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42DD64251F984D2E007487B9 /* FBSDKLoginKit.framework */; };
 		42DD64231F984D2E007487B9 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42DD64261F984D2E007487B9 /* FBSDKShareKit.framework */; };
@@ -57,6 +61,10 @@
 		428FBCD71F8E917F004E82DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		428FBCDD1F8E92B0004E82DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		428FBCE11F8E96F4004E82DE /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		4298F9581FAA56F80069E2CF /* PageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
+		4298F9591FAA56F80069E2CF /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		4298F95C1FAA570C0069E2CF /* InfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoController.swift; path = ../../../../Downloads/EatIn/eatin/Controller/InfoController.swift; sourceTree = "<group>"; };
+		4298F95E1FAA57B20069E2CF /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = ../../../../Downloads/EatIn/eatin/Controller/Extensions.swift; sourceTree = "<group>"; };
 		42DD64241F984D2E007487B9 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42DD64251F984D2E007487B9 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42DD64261F984D2E007487B9 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,12 +151,16 @@
 				42120E391F9B8B9300F8B976 /* HelperMethods */,
 				4243FC3C1F99838D00298BC4 /* ProfileControllers */,
 				428FBCCD1F8E917F004E82DE /* ViewController.swift */,
+				4298F9591FAA56F80069E2CF /* Page.swift */,
+				4298F9581FAA56F80069E2CF /* PageCell.swift */,
 				428FBCE11F8E96F4004E82DE /* LoginController.swift */,
 				426FCC171F8FDF2B00DDE8F2 /* ExploreController.swift */,
 				426FCC1F1F8FDFC800DDE8F2 /* OrderController.swift */,
 				426FCC1D1F8FDFAA00DDE8F2 /* InboxController.swift */,
 				426FCC1B1F8FDF9900DDE8F2 /* ProfileController.swift */,
 				42DD64271F9946EF007487B9 /* IntroController.swift */,
+				4298F95E1FAA57B20069E2CF /* Extensions.swift */,
+				4298F95C1FAA570C0069E2CF /* InfoController.swift */,
 				64F0A8B71FA978B3009D57CF /* NewMessageController.swift */,
 				64F0A8C01FAA317D009D57CF /* ChatLogController.swift */,
 			);
@@ -332,17 +344,21 @@
 			files = (
 				428FBCCE1F8E917F004E82DE /* ViewController.swift in Sources */,
 				426FCC1E1F8FDFAA00DDE8F2 /* InboxController.swift in Sources */,
+				4298F95D1FAA570C0069E2CF /* InfoController.swift in Sources */,
 				64F0A8C11FAA317D009D57CF /* ChatLogController.swift in Sources */,
 				4224EC1C1F9F9801003B5F11 /* ChefMenuController.swift in Sources */,
 				42DD64281F9946EF007487B9 /* IntroController.swift in Sources */,
 				426FCC181F8FDF2B00DDE8F2 /* ExploreController.swift in Sources */,
 				4243FC481F998ADD00298BC4 /* SettingsController.swift in Sources */,
 				4224EC1E1F9FE2FF003B5F11 /* AddMenuItemController.swift in Sources */,
+				4298F95F1FAA57B20069E2CF /* Extensions.swift in Sources */,
 				428FBCE21F8E96F4004E82DE /* LoginController.swift in Sources */,
 				428FBCCC1F8E917F004E82DE /* AppDelegate.swift in Sources */,
+				4298F95A1FAA56F80069E2CF /* PageCell.swift in Sources */,
 				4243FC461F998ACF00298BC4 /* HelpController.swift in Sources */,
 				426FCC1C1F8FDF9900DDE8F2 /* ProfileController.swift in Sources */,
 				4243FC421F998AB600298BC4 /* BecomeAChefController.swift in Sources */,
+				4298F95B1FAA56F80069E2CF /* Page.swift in Sources */,
 				64F0A8B81FA978B3009D57CF /* NewMessageController.swift in Sources */,
 				64F0A8BF1FA99804009D57CF /* user.swift in Sources */,
 				4243FC401F998A2D00298BC4 /* NotificationsController.swift in Sources */,

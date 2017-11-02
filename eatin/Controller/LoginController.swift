@@ -113,7 +113,7 @@ class LoginController: UIViewController {
                     return
                 }
                 
-                self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
             })
         }
     }
@@ -143,7 +143,7 @@ class LoginController: UIViewController {
                 return
             }
             
-            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+            self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
         }
     }
     

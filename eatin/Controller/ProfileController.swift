@@ -108,8 +108,6 @@ class ProfileController: UIViewController, MFMailComposeViewControllerDelegate {
         
         self.title = "Profile"
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
-        
         self.view.addSubview(profileButton)
         self.view.addSubview(notificationsButton)
         self.view.addSubview(becomeAChefButton)
@@ -186,24 +184,5 @@ class ProfileController: UIViewController, MFMailComposeViewControllerDelegate {
     func settingsButtonAction(sender: UIButton!) {
         let settingsController = UINavigationController(rootViewController: SettingsController())
         present(settingsController, animated: true, completion: nil)
-    }
-    
-    @objc
-    func handleLogout() {
-        
-        do {
-            try Auth.auth().signOut()
-        } catch let logoutError {
-            print(logoutError)
-        }
-        
-        if(FBSDKAccessToken.current() != nil) {
-            let loginManager = FBSDKLoginManager()
-            loginManager.logOut()
-        }
-        
-        let introController = IntroController()
-        
-        present(introController, animated: true, completion: nil)
     }
 }

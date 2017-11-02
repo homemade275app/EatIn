@@ -8,9 +8,23 @@
 
 import UIKit
 import Firebase
+<<<<<<< HEAD
+=======
+import FirebaseAuth
+>>>>>>> 47fbe14208dbdc3ace85cce88ed14423a7bb6cb2
 import FBSDKLoginKit
 
 class SettingsController: UIViewController {
+    
+    let logoutButton: UIButton = {
+        let logoutButton = UIButton()
+        logoutButton.backgroundColor = UIColor.red
+        logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        logoutButton.setTitle("Logout", for: .normal)
+        logoutButton.setTitleColor(UIColor.white, for: .normal)
+        logoutButton.addTarget(self, action: #selector(handleLogout), for: .touchUpInside)
+        return logoutButton
+    }()
     
     let deleteButton: UIButton = {
         let deleteButton = UIButton()
@@ -43,7 +57,11 @@ class SettingsController: UIViewController {
       
         self.view.addSubview(logoutButton)
         self.view.addSubview(deleteButton)
+<<<<<<< HEAD
 
+=======
+        self.view.addSubview(logoutButton)
+>>>>>>> 47fbe14208dbdc3ace85cce88ed14423a7bb6cb2
         
         addButtons()
     }
@@ -108,8 +126,14 @@ class SettingsController: UIViewController {
         self.present(introController, animated: true, completion: nil)
     }
     
+<<<<<<< HEAD
     lazy var yesAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
         UIAlertAction in
+=======
+    @objc
+    func handleLogout() {
+        
+>>>>>>> 47fbe14208dbdc3ace85cce88ed14423a7bb6cb2
         do {
             try Auth.auth().signOut()
         } catch let logoutError {
@@ -121,9 +145,15 @@ class SettingsController: UIViewController {
             loginManager.logOut()
         }
         
+<<<<<<< HEAD
         let introController = IntroController()
         
         self.present(introController, animated: true, completion: nil)
+=======
+        let introController = InfoController()
+        
+        present(introController, animated: true, completion: nil)
+>>>>>>> 47fbe14208dbdc3ace85cce88ed14423a7bb6cb2
     }
     
 }
