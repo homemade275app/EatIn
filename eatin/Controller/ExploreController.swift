@@ -49,8 +49,6 @@ class ExploreController: UICollectionViewController, UICollectionViewDelegateFlo
         
         self.title = "Explore"
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
-        
         collectionView?.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
@@ -88,25 +86,6 @@ class ExploreController: UICollectionViewController, UICollectionViewDelegateFlo
         super.viewWillTransition(to: size, with: coordinator)
         
         collectionView?.collectionViewLayout.invalidateLayout()
-    }
-    
-    @objc
-    func handleLogout() {
-        
-        do {
-            try Auth.auth().signOut()
-        } catch let logoutError {
-            print(logoutError)
-        }
-        
-        if(FBSDKAccessToken.current() != nil) {
-            let loginManager = FBSDKLoginManager()
-            loginManager.logOut()
-        }
-        
-        let introController = InfoController()
-        
-        present(introController, animated: true, completion: nil)
     }
 }
 

@@ -8,8 +8,20 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
+import FBSDKLoginKit
 
 class SettingsController: UIViewController {
+    
+    let logoutButton: UIButton = {
+        let logoutButton = UIButton()
+        logoutButton.backgroundColor = UIColor.red
+        logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        logoutButton.setTitle("Logout", for: .normal)
+        logoutButton.setTitleColor(UIColor.white, for: .normal)
+        logoutButton.addTarget(self, action: #selector(handleLogout), for: .touchUpInside)
+        return logoutButton
+    }()
     
     let deleteButton: UIButton = {
         let deleteButton = UIButton()
@@ -31,13 +43,19 @@ class SettingsController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Return", style: .plain, target: self, action: #selector(handleReturn))
         
         self.view.addSubview(deleteButton)
+        self.view.addSubview(logoutButton)
         
         addButtons()
     }
     
     func addButtons() {
+        logoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        logoutButton.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 12).isActive = true
+        logoutButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        logoutButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        
         deleteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        deleteButton.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 12).isActive = true
+        deleteButton.topAnchor.constraint(equalTo: logoutButton.bottomAnchor, constant: 12).isActive = true
         deleteButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         deleteButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
     }
@@ -79,6 +97,25 @@ class SettingsController: UIViewController {
         
         let introController = IntroController()
         self.present(introController, animated: true, completion: nil)
+    }
+    
+    @objc
+    func handleLogout() {
+        
+        do {
+            try Auth.auth().signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
+        
+        if(FBSDKAccessToken.current() != nil) {
+            let loginManager = FBSDKLoginManager()
+            loginManager.logOut()
+        }
+        
+        let introController = InfoController()
+        
+        present(introController, animated: true, completion: nil)
     }
     
 }
