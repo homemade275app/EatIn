@@ -89,7 +89,7 @@ class ViewController: UITabBarController {
             print(logoutError)
         }
         
-        let introController = InfoController()
+        let introController = IntroController()
         
         present(introController, animated: true, completion: nil)
     }
