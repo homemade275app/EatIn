@@ -125,7 +125,7 @@ class SettingsController: UIViewController {
             loginManager.logOut()
         }
         
-        let introController = IntroController()
+        let introController = InfoController()
         self.present(introController, animated: true, completion: nil)
         
     }

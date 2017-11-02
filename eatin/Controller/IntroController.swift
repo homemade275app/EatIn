@@ -104,6 +104,7 @@ class IntroController: UIViewController, FBSDKLoginButtonDelegate {
         view.addSubview(loginCreateButton)
         view.addSubview(imageView)
        
+        _ = imageView.anchor(view.topAnchor, left: view.leftAnchor, bottom: facebookButton.topAnchor, right: view.rightAnchor, topConstant: 64, leftConstant: 100, bottomConstant: 64, rightConstant: 100, widthConstant: 0, heightConstant: 0)
         
         setupFacebookLogin()
         setupLoginButton()
