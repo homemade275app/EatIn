@@ -16,10 +16,7 @@ import MessageUI
 
 class ProfileController: UIViewController, MFMailComposeViewControllerDelegate {
     
-  
-
-    
-   
+ 
     
     //Set profile title as userID
     let profileButton: UIButton = {

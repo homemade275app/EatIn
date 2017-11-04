@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import FBSDKLoginKit
+
 
 class UserProfileController: UIViewController {
     
@@ -18,6 +20,10 @@ class UserProfileController: UIViewController {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Return", style: .plain, target: self, action: #selector(handleReturn))
         
+        self.view.addSubview(locationButton)
+        
+        
+        addButtons()
         getUserInfo()
     }
     
@@ -41,4 +47,35 @@ class UserProfileController: UIViewController {
             print(error.localizedDescription)
         }
     }
+
+    let locationButton: UIButton = {
+        let locationButton = UIButton()
+        locationButton.backgroundColor = UIColor.red
+        locationButton.translatesAutoresizingMaskIntoConstraints = false
+        locationButton.setTitle("Location", for: .normal)
+        locationButton.setTitleColor(UIColor.white, for: .normal)
+        locationButton.addTarget(self, action: #selector(locationButtonAction), for: .touchUpInside)
+        return locationButton
+    }()
+    
+
+    
+    
+    func addButtons() {
+        locationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        locationButton.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 12).isActive = true
+        locationButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        locationButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        
+
+    }
+    
+  
+    
+    @objc func locationButtonAction(sender: UIButton!) {
+        let locationController = UINavigationController(rootViewController: LocationController())
+        present(locationController, animated: true, completion: nil)
+    }
+ 
+    
 }
