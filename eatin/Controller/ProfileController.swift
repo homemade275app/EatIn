@@ -16,14 +16,30 @@ import MessageUI
 
 class ProfileController: UIViewController, MFMailComposeViewControllerDelegate {
     
+  
+
+    
+   
+    
+    //Set profile title as userID
     let profileButton: UIButton = {
         let profileButton = UIButton()
+
+        let ref = Database.database().reference()
+        let userID = Auth.auth().currentUser?.uid
+        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+        let value = snapshot.value as? NSDictionary
+        let username = value?["name"] as? String ?? "Profile"
+        profileButton.setTitle(username, for: .normal)
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
         profileButton.backgroundColor = .clear
         profileButton.layer.cornerRadius = 5
         profileButton.layer.borderWidth = 2
         profileButton.translatesAutoresizingMaskIntoConstraints = false
         profileButton.layer.borderColor = UIColor.orange.cgColor
-        profileButton.setTitle("User Profile", for: .normal)
         profileButton.setTitleColor(UIColor.orange, for: .normal)
         profileButton.addTarget(self, action: #selector(profileButtonAction), for: .touchUpInside)
         return profileButton
