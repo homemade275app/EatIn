@@ -17,8 +17,12 @@ class Post {
     var name: String?
     var profileImageName: String?
     var rating: Int?
+    var statusTitle: String?
     var statusText: String?
     var statusImageName: String?
+    var price: String?
+    var availability: String?
+    var emblems: String?
 }
 
 class ExploreController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
@@ -30,17 +34,25 @@ class ExploreController: UICollectionViewController, UICollectionViewDelegateFlo
         
         let postGoat = Post()
         postGoat.name = "Goat McGoat"
+        postGoat.statusTitle = "The Best Grass"
         postGoat.statusText = "Come get your grass, best grass"
         postGoat.profileImageName = "goat"
         postGoat.rating = 3
         postGoat.statusImageName = "grass"
+        postGoat.price = "$$$$"
+        postGoat.availability = "MWF"
+        postGoat.emblems = "GF"
         
         let postSheep = Post()
         postSheep.name = "Sheep mcSheep"
+        postSheep.statusTitle = "The Second Best Grass"
         postSheep.statusText = "BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA"
         postSheep.profileImageName = "sheep"
         postSheep.rating = 4
         postSheep.statusImageName = "grass2"
+        postSheep.price = "$"
+        postSheep.availability = "Sat"
+        postSheep.emblems = "Hot"
         
         posts.append(postGoat)
         posts.append(postSheep)
@@ -74,7 +86,7 @@ class ExploreController: UICollectionViewController, UICollectionViewDelegateFlo
             
             let rect = NSString(string: statusText).boundingRect(with: CGSize(width: view.frame.width, height: 1000), options: NSStringDrawingOptions.usesFontLeading.union(NSStringDrawingOptions.usesLineFragmentOrigin), attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)], context: nil)
             
-            let knownHeight: CGFloat = 8 + 44 + 4 + 4 + 200 + 8 + 24 + 8 + 44
+            let knownHeight: CGFloat = 8 + 44 + 23 + 4 + 4 + 200 + 8 + 24 + 8 + 44
             
             return CGSize(width: view.frame.width, height: rect.height + knownHeight + 24)
         }
@@ -120,6 +132,10 @@ class FeedCell: UICollectionViewCell {
                 nameLabel.attributedText = attributedText
             }
             
+            if let statusTitle = post?.statusTitle {
+                statusTitleView.text = statusTitle
+            }
+            
             if let statusText = post?.statusText {
                 statusTextView.text = statusText
             }
@@ -130,6 +146,18 @@ class FeedCell: UICollectionViewCell {
             
             if let statusImageName = post?.statusImageName {
                 statusImageView.image = UIImage(named: statusImageName)
+            }
+            
+            if let price = post?.price {
+                priceLabel.text = price
+            }
+            
+            if let availability = post?.availability {
+                availabilityLabel.text = availability
+            }
+            
+            if let emblems = post?.emblems {
+                emblemLabel.text = emblems
             }
             
         }
@@ -155,30 +183,47 @@ class FeedCell: UICollectionViewCell {
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "goat")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
     let statusTextView: UITextView = {
         let textView = UITextView()
-        textView.text = "I make the best grass in town"
         textView.font = UIFont.systemFont(ofSize: 14)
+        textView.isScrollEnabled = false
+        return textView
+    }()
+    
+    let statusTitleView: UITextView = {
+        let textView = UITextView()
+        textView.font = UIFont.systemFont(ofSize: 20)
         textView.isScrollEnabled = false
         return textView
     }()
     
     let statusImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "grass")
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         return imageView
     }()
     
-    let likesCommentsLabel: UILabel = {
+    let priceLabel: UILabel = {
         let label = UILabel()
-        label.text = " 500 Likes    14 Comments"
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = UIColor.rgb(155, green: 161, blue: 171)
+        return label
+    }()
+    
+    let availabilityLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = UIColor.rgb(155, green: 161, blue: 171)
+        return label
+    }()
+    
+    let emblemLabel: UILabel = {
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor.rgb(155, green: 161, blue: 171)
         return label
@@ -190,7 +235,6 @@ class FeedCell: UICollectionViewCell {
         return view
     }()
     
-    let orderButton = FeedCell.buttonForTitle("Order", imageName: "categories")
     let connectButton: UIButton = FeedCell.buttonForTitle("Connect", imageName: "inbox")
     let shareButton: UIButton = FeedCell.buttonForTitle("Share", imageName: "profile")
     
@@ -211,32 +255,39 @@ class FeedCell: UICollectionViewCell {
         backgroundColor = UIColor.white
         addSubview(nameLabel)
         addSubview(profileImageView)
+        addSubview(statusTitleView)
         addSubview(statusTextView)
         addSubview(statusImageView)
-        addSubview(likesCommentsLabel)
+        addSubview(priceLabel)
+        addSubview(availabilityLabel)
+        addSubview(emblemLabel)
         addSubview(dividerLineView)
         
-        addSubview(orderButton)
         addSubview(connectButton)
         addSubview(shareButton)
         
         addConstraintsWithFormat("H:|-8-[v0(44)]-8-[v1]|", views: profileImageView, nameLabel)
         
+        addConstraintsWithFormat("H:|-4-[v0]-4-|", views: statusTitleView)
+        
         addConstraintsWithFormat("H:|-4-[v0]-4-|", views: statusTextView)
         
         addConstraintsWithFormat("H:|[v0]|", views: statusImageView)
         
-        addConstraintsWithFormat("H:|-12-[v0]", views: likesCommentsLabel)
+        addConstraintsWithFormat("H:|-64-[v0(v2)]-8-[v1(v2)]-8-[v2]-8-|", views: priceLabel, availabilityLabel, emblemLabel)
         
         addConstraintsWithFormat("H:|-12-[v0]-12-|", views: dividerLineView)
         
-        addConstraintsWithFormat("H:|[v0(v2)][v1(v2)][v2]|", views: orderButton, connectButton, shareButton)
+        addConstraintsWithFormat("H:|[v0(v1)][v1]|", views: connectButton, shareButton)
         
         addConstraintsWithFormat("V:|-12-[v0]", views: nameLabel)
         
-        addConstraintsWithFormat("V:|-8-[v0(44)]-4-[v1]-4-[v2(200)]-8-[v3(24)]-8-[v4(0.4)][v5(44)]|", views: profileImageView, statusTextView, statusImageView, likesCommentsLabel, dividerLineView, orderButton)
+        addConstraintsWithFormat("V:|-8-[v0(44)][v1][v2]-4-[v3(200)]-36-[v4(0.4)][v5(44)]|", views: profileImageView, statusTitleView, statusTextView, statusImageView, dividerLineView, connectButton)
         
-        addConstraintsWithFormat("V:[v0(44)]|", views: connectButton)
+        addConstraintsWithFormat("V:[v0(124)]|", views: priceLabel)
+        addConstraintsWithFormat("V:[v0(124)]|", views: availabilityLabel)
+        addConstraintsWithFormat("V:[v0(124)]|", views: emblemLabel)
+        
         addConstraintsWithFormat("V:[v0(44)]|", views: shareButton)
         
     }
