@@ -24,14 +24,16 @@ class ProfileController: UIViewController, MFMailComposeViewControllerDelegate {
 
         let ref = Database.database().reference()
         let userID = Auth.auth().currentUser?.uid
-        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-        let value = snapshot.value as? NSDictionary
-        let username = value?["name"] as? String ?? "Profile"
-        profileButton.setTitle(username, for: .normal)
-        }) { (error) in
-            print(error.localizedDescription)
+        if(userID != nil) {
+            ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                let username = value?["name"] as? String ?? "Profile"
+                profileButton.setTitle(username, for: .normal)
+            }) { (error) in
+                print(error.localizedDescription)
+            }
         }
-        
+            
         profileButton.backgroundColor = .clear
         profileButton.layer.cornerRadius = 5
         profileButton.layer.borderWidth = 2
