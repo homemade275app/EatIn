@@ -31,7 +31,17 @@ class InboxController: UIViewController {
 //            , withCancel: nil)
         
         self.title = "Inbox"
+        observeMessage()
     }
+    func observeMessage(){
+        
+           let ref = Database.database().reference().child("messages")
+            ref.observe(.childAdded, with: {(snapshot) in
+                print(snapshot)
+                    
+            }, withCancel: nil)
+        }
+    
     @objc func handlechatLogController(){
         let chatcogcontroller = chatlogController(collectionViewLayout: UICollectionViewFlowLayout())
         let navController = UINavigationController(rootViewController: chatcogcontroller)

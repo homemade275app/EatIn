@@ -34,6 +34,7 @@
 		42DD64221F984D2E007487B9 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42DD64251F984D2E007487B9 /* FBSDKLoginKit.framework */; };
 		42DD64231F984D2E007487B9 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42DD64261F984D2E007487B9 /* FBSDKShareKit.framework */; };
 		42DD64281F9946EF007487B9 /* IntroController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DD64271F9946EF007487B9 /* IntroController.swift */; };
+		648608301FB3784500E4A9D5 /*  message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6486082F1FB3784500E4A9D5 /*  message.swift */; };
 		64F0A8B81FA978B3009D57CF /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0A8B71FA978B3009D57CF /* NewMessageController.swift */; };
 		64F0A8BF1FA99804009D57CF /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0A8BE1FA99804009D57CF /* user.swift */; };
 		64F0A8C11FAA317D009D57CF /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0A8C01FAA317D009D57CF /* ChatLogController.swift */; };
@@ -70,6 +71,7 @@
 		42DD64251F984D2E007487B9 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42DD64261F984D2E007487B9 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42DD64271F9946EF007487B9 /* IntroController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroController.swift; sourceTree = "<group>"; };
+		6486082F1FB3784500E4A9D5 /*  message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " message.swift"; sourceTree = "<group>"; };
 		64F0A8B71FA978B3009D57CF /* NewMessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
 		64F0A8BE1FA99804009D57CF /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 		64F0A8C01FAA317D009D57CF /* ChatLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				64F0A8BE1FA99804009D57CF /* user.swift */,
+				6486082F1FB3784500E4A9D5 /*  message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				64F0A8BF1FA99804009D57CF /* user.swift in Sources */,
 				4243FC401F998A2D00298BC4 /* NotificationsController.swift in Sources */,
 				4243FC3E1F9983A700298BC4 /* UserProfileController.swift in Sources */,
+				648608301FB3784500E4A9D5 /*  message.swift in Sources */,
 				426FCC201F8FDFC800DDE8F2 /* OrderController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
