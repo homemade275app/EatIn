@@ -113,10 +113,22 @@ class chatlogController: UICollectionViewController{
     
     // Create Handlesend method for adding a target to send botton
     @objc func handleSend(){
-        
+        let user = User()
+        let userinputRecipiant = inputRecipiant.text
+        Database.database().reference().child("users").observe(.childAdded, with: {(DataSnapshot) in
+            if let Dictionary = DataSnapshot.value as? [String: AnyObject]{
+                //let user = User()
+                user.setValuesForKeys(Dictionary)
+                if (user.name == userinputRecipiant){
+                    user.id = DataSnapshot.key
+                }else{
+                    print("error")
+                }
+            }
+        }, withCancel: nil)
         let ref = Database.database().reference().child("messages")
         let childRef = ref.childByAutoId()
-        let user = User()
+        
         
         let toId = user.id
         let values = ["text": inputTextField.text!, "toId": toId]
