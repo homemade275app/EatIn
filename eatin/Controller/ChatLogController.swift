@@ -12,11 +12,19 @@ import Firebase
 class chatlogController: UICollectionViewController{
     
     let inputTextField: UITextField = {
+        let Field = UITextField()
+        Field.placeholder = "Enter Message....."
+        Field.translatesAutoresizingMaskIntoConstraints = false
+        return Field
+    }()
+    
+    let inputRecipiant: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Enter Message....."
+        textField.placeholder = "Enter Recipiant.."
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +43,12 @@ class chatlogController: UICollectionViewController{
         containerView.backgroundColor = UIColor.white
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
+       
+        
         view.addSubview(containerView)
         
         containerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         containerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
@@ -78,7 +88,27 @@ class chatlogController: UICollectionViewController{
         seperatorLine.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
         seperatorLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
+        //Add message recipiant box
+        let containerView2 = UIView()
+        containerView2.backgroundColor = UIColor.white
+        containerView2.translatesAutoresizingMaskIntoConstraints = false
         
+        view.addSubview(containerView2)
+        
+        containerView2.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        containerView2.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -620) .isActive = true
+        containerView2.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        containerView2.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        containerView2.addSubview(inputRecipiant)
+        
+        // x,y,w,h
+        inputRecipiant.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        inputRecipiant.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -620).isActive = true
+        inputRecipiant.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        //inputRecipiant.centerYAnchor.constraint(equalTo: containerView2.centerYAnchor).isActive = true
+        //inputRecipiant.rightAnchor.constraint(equalTo: containerView2.leftAnchor).isActive = true
+        inputRecipiant.heightAnchor.constraint(equalToConstant: 45).isActive = true
     }
     
     // Create Handlesend method for adding a target to send botton
@@ -86,7 +116,10 @@ class chatlogController: UICollectionViewController{
         
         let ref = Database.database().reference().child("messages")
         let childRef = ref.childByAutoId()
-        let values = ["text": inputTextField.text!]
+        let user = User()
+        
+        let toId = user.id
+        let values = ["text": inputTextField.text!, "toId": toId]
         childRef.updateChildValues(values)
         
         
