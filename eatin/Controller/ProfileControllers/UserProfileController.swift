@@ -19,12 +19,13 @@ class UserProfileController: UIViewController {
         view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Return", style: .plain, target: self, action: #selector(handleReturn))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonAction))
         
-        self.view.addSubview(locationButton)
-        
-        
-        addButtons()
-        getUserInfo()
+        self.view.addSubview(nameLabel)
+        self.view.addSubview(cityLabel)
+
+        setLabelText()
+        addLabels()
     }
     
     @objc
@@ -32,49 +33,80 @@ class UserProfileController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func getUserInfo() {
-        let ref = Database.database().reference()
-        
-        let userID = Auth.auth().currentUser?.uid
-        
-        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            let username = value?["name"] as? String ?? "Profile"
-            
-            self.title = username
-            
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-    }
+    
+    @objc
+    func setLabelText() {
 
-    let locationButton: UIButton = {
-        let locationButton = UIButton()
-        locationButton.backgroundColor = UIColor.red
-        locationButton.translatesAutoresizingMaskIntoConstraints = false
-        locationButton.setTitle("Location", for: .normal)
-        locationButton.setTitleColor(UIColor.white, for: .normal)
-        locationButton.addTarget(self, action: #selector(locationButtonAction), for: .touchUpInside)
-        return locationButton
+        let ref = Database.database().reference()
+        let userID = Auth.auth().currentUser?.uid
+        if(userID != nil) {
+            ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                
+                //Set name label
+                let username = value?["name"] as? String ?? "Profile"
+                self.nameLabel.text = username
+                
+                //Set city label
+                let city = value?["city"] as? String ?? "City"
+                if(city != ""){
+                    self.cityLabel.text = city
+                
+                }
+                else{
+                    self.cityLabel.text = "City"
+                }
+                
+            }) { (error) in
+                print(error.localizedDescription)
+            }
+        }
+        
+        
+        
+        
+    }
+    
+   
+
+    let nameLabel: UILabel = {
+        let nameLabel = UILabel()
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.textAlignment = .center
+        nameLabel.textColor = .orange
+        return nameLabel
+    }()
+    
+    let cityLabel: UILabel = {
+        let cityLabel = UILabel()
+        cityLabel.translatesAutoresizingMaskIntoConstraints = false
+        cityLabel.textAlignment = .center
+        cityLabel.textColor = .orange
+        return cityLabel
     }()
     
 
     
     
-    func addButtons() {
-        locationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        locationButton.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 12).isActive = true
-        locationButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        locationButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
+    func addLabels() {
+        nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 12).isActive = true
+        nameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        nameLabel.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        
+        cityLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        cityLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 12).isActive = true
+        cityLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        cityLabel.heightAnchor.constraint(equalToConstant: 75).isActive = true
         
 
     }
     
   
     
-    @objc func locationButtonAction(sender: UIButton!) {
-        let locationController = UINavigationController(rootViewController: LocationController())
-        present(locationController, animated: true, completion: nil)
+    @objc func editButtonAction(sender: UIButton!) {
+        let editProfileController = UINavigationController(rootViewController: EditProfileController())
+        present(editProfileController, animated: true, completion: nil)
     }
  
     
