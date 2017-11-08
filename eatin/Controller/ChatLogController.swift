@@ -119,19 +119,21 @@ class chatlogController: UICollectionViewController{
             if let Dictionary = DataSnapshot.value as? [String: AnyObject]{
                 //let user = User()
                 user.setValuesForKeys(Dictionary)
+                DispatchQueue.main.async{
                 if (user.name == userinputRecipiant){
                     user.id = DataSnapshot.key
                 }else{
                     print("error")
-                }
+                    }}
             }
         }, withCancel: nil)
         let ref = Database.database().reference().child("messages")
         let childRef = ref.childByAutoId()
-        
+        let fromId = Auth.auth().currentUser?.uid
         
         let toId = user.id
-        let values = ["text": inputTextField.text!, "toId": toId]
+        let timestamp = Int(NSDate().timeIntervalSince1970)
+        let values = ["text": inputTextField.text!, "toId": toId,"fromID": fromId, "timestamp": timestamp] as [String : Any]
         childRef.updateChildValues(values)
         
         

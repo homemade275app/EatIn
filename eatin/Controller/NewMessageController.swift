@@ -24,8 +24,9 @@ class NewMessageController: UITableViewController {
                 let user = User()
                 user.setValuesForKeys(Dictionary)
                 self.users.append(user)
-                //DispatchQueu()
+                DispatchQueue.main.async{
                 self.tableView.reloadData()
+                }
             }
         }, withCancel: nil)
     }
