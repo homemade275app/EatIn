@@ -66,6 +66,8 @@ class ExploreController: UICollectionViewController, UICollectionViewDelegateFlo
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
         
         collectionView?.alwaysBounceVertical = true
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(filterController))
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -98,6 +100,12 @@ class ExploreController: UICollectionViewController, UICollectionViewDelegateFlo
         super.viewWillTransition(to: size, with: coordinator)
         
         collectionView?.collectionViewLayout.invalidateLayout()
+    }
+    
+    @objc func filterController(){
+        let filtercontroller = FilterController(collectionViewLayout: UICollectionViewFlowLayout())
+        let navController = UINavigationController(rootViewController: filtercontroller)
+        present(navController,animated: true, completion: nil)
     }
 }
 
@@ -236,6 +244,7 @@ class FeedCell: UICollectionViewCell {
     }()
     
     let connectButton: UIButton = FeedCell.buttonForTitle("Connect", imageName: "inbox")
+    let saveButton: UIButton = FeedCell.buttonForTitle("Save", imageName: "orders")
     let shareButton: UIButton = FeedCell.buttonForTitle("Share", imageName: "profile")
     
     static func buttonForTitle(_ title: String, imageName: String) -> UIButton {
@@ -264,6 +273,7 @@ class FeedCell: UICollectionViewCell {
         addSubview(dividerLineView)
         
         addSubview(connectButton)
+        addSubview(saveButton)
         addSubview(shareButton)
         
         addConstraintsWithFormat("H:|-8-[v0(44)]-8-[v1]|", views: profileImageView, nameLabel)
@@ -278,7 +288,7 @@ class FeedCell: UICollectionViewCell {
         
         addConstraintsWithFormat("H:|-12-[v0]-12-|", views: dividerLineView)
         
-        addConstraintsWithFormat("H:|[v0(v1)][v1]|", views: connectButton, shareButton)
+        addConstraintsWithFormat("H:|[v0(v2)][v1(v2)][v2]|", views: connectButton, saveButton, shareButton)
         
         addConstraintsWithFormat("V:|-12-[v0]", views: nameLabel)
         
@@ -288,6 +298,7 @@ class FeedCell: UICollectionViewCell {
         addConstraintsWithFormat("V:[v0(124)]|", views: availabilityLabel)
         addConstraintsWithFormat("V:[v0(124)]|", views: emblemLabel)
         
+        addConstraintsWithFormat("V:[v0(44)]|", views: saveButton)
         addConstraintsWithFormat("V:[v0(44)]|", views: shareButton)
         
     }

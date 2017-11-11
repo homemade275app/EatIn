@@ -38,6 +38,7 @@
 		64F0A8B81FA978B3009D57CF /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0A8B71FA978B3009D57CF /* NewMessageController.swift */; };
 		64F0A8BF1FA99804009D57CF /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0A8BE1FA99804009D57CF /* user.swift */; };
 		64F0A8C11FAA317D009D57CF /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0A8C01FAA317D009D57CF /* ChatLogController.swift */; };
+		E88056141FB66B2A00C23464 /* FilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88056131FB66B2A00C23464 /* FilterController.swift */; };
 		EFDF16411FB39E54000BE480 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDF16401FB39E54000BE480 /* EditProfileController.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		64F0A8C01FAA317D009D57CF /* ChatLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
 		686F2035FEAEED40B82E2812 /* Pods_eatin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eatin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		860F9A01FDCB9B7D872F6020 /* Pods-eatin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eatin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eatin/Pods-eatin.debug.xcconfig"; sourceTree = "<group>"; };
+		E88056131FB66B2A00C23464 /* FilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; };
 		EFDF16401FB39E54000BE480 /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,6 +170,7 @@
 				64F0A8B71FA978B3009D57CF /* NewMessageController.swift */,
 				64F0A8C01FAA317D009D57CF /* ChatLogController.swift */,
 				4256D6761FAB9DDC0061A217 /* InfoController.swift */,
+				E88056131FB66B2A00C23464 /* FilterController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				4243FC461F998ACF00298BC4 /* HelpController.swift in Sources */,
 				426FCC1C1F8FDF9900DDE8F2 /* ProfileController.swift in Sources */,
 				4256D6751FAB9D200061A217 /* Extensions.swift in Sources */,
+				E88056141FB66B2A00C23464 /* FilterController.swift in Sources */,
 				EFDF16411FB39E54000BE480 /* EditProfileController.swift in Sources */,
 				4243FC421F998AB600298BC4 /* BecomeAChefController.swift in Sources */,
 				4298F95B1FAA56F80069E2CF /* Page.swift in Sources */,
