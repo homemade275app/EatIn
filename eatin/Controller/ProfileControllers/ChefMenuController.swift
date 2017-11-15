@@ -9,15 +9,13 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseStorage
 
 class ChefMenuController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var menuList = [info]()
     
     var images = [UIImage]()
-    
-    let selectedCellHeight: CGFloat = 88.0
-    let unselectedCellHeight: CGFloat = 44.0
     
     let menuTable : UITableView = {
         let menuTable = UITableView()

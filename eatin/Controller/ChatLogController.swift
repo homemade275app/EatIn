@@ -10,7 +10,8 @@ import UIKit
 import Firebase
 
 class chatlogController: UICollectionViewController{
-    let toId = "86YYutqGOdUWcUROJkPqLDzT8142"
+    
+    var toId = ""
     
     let inputTextField: UITextField = {
         let Field = UITextField()

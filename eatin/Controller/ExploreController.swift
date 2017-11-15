@@ -55,7 +55,7 @@ class ExploreController: UICollectionViewController, UICollectionViewDelegateFlo
                 print("one")
                 let value = rest.value as? NSDictionary
                 let post = Post()
-                post.name = "hello"
+                post.name = ""
                 post.statusTitle = value?["name"] as? String
                 post.statusText = value?["description"] as? String
                 post.rating = 3
@@ -168,6 +168,7 @@ class FeedCell: UICollectionViewCell {
                 emblemLabel.text = emblems
             }
             
+            setname()
         }
     }
     
@@ -184,8 +185,6 @@ class FeedCell: UICollectionViewCell {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
-        
-
         return label
     }()
     
@@ -304,9 +303,22 @@ class FeedCell: UICollectionViewCell {
         connectButton.addTarget(self, action: #selector(connect), for: .touchUpInside)
     }
     
+    func setname() {
+        let id = post?.userID
+        let ref = Database.database().reference()
+        ref.child("users").child(id!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            self.nameLabel.text = value?["name"] as? String ?? "Profile"
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
     @objc
     func connect() {
+        let id = post?.userID
         let chatController = chatlogController(collectionViewLayout: UICollectionViewFlowLayout())
+        chatController.toId = id!
         let nav = UINavigationController(rootViewController: chatController)
         UIApplication.shared.keyWindow?.rootViewController?.present(nav, animated: true)
     }
