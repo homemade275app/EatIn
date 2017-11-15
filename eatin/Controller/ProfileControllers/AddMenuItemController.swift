@@ -10,10 +10,36 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class AddMenuItemController : UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddMenuItemController : UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    var imageLayout: NSLayoutConstraint?
+    
+    var images = [UIImage]()
+    
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = UIColor.white
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.dataSource = self
+        cv.delegate = self
+        return cv
+    }()
+    
+    lazy var pageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.pageIndicatorTintColor = .lightGray
+        pc.currentPageIndicatorTintColor = UIColor(red: 247/255, green: 154/255, blue: 27/255, alpha: 1)
+        pc.numberOfPages = self.images.count
+        return pc
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.collectionView.isScrollEnabled = false
         
         view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
         
@@ -24,21 +50,30 @@ class AddMenuItemController : UIViewController, UIImagePickerControllerDelegate,
         view.addSubview(nameTextField)
         view.addSubview(descriptionTextField)
         view.addSubview(imageButton)
-        view.addSubview(imageView)
+        view.addSubview(collectionView)
         view.addSubview(submitButton)
         
         addInputs()
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(swipeLeft)
+        
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+        swipeUp.direction = UISwipeGestureRecognizerDirection.up
+        self.view.addGestureRecognizer(swipeUp)
+        
+        registerCells()
     }
     
     @objc
     func handleReturn() {
         self.dismiss(animated: true, completion: nil)
     }
-    
-    let imageView : UIImageView = {
-        let homeImage = UIImage()
-        return UIImageView(image: homeImage)
-    }()
     
     let nameTextField: UITextField = {
         let tf = UITextField()
@@ -108,7 +143,13 @@ class AddMenuItemController : UIViewController, UIImagePickerControllerDelegate,
         }
         
         if let image = selectedImage {
-            imageView.image = image
+            imageLayout?.constant = 200
+            collectionView.isHidden = false
+            images.append(image)
+            pageControl.numberOfPages += 1;
+            let indexPath = IndexPath(item: images.index(of: image)!, section: 0)
+            collectionView.insertItems(at: [indexPath])
+            collectionView.reloadData()
         }
         
         dismiss(animated: true, completion: nil)
@@ -125,13 +166,15 @@ class AddMenuItemController : UIViewController, UIImagePickerControllerDelegate,
         descriptionTextField.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         descriptionTextField.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
-//        imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        imageView.topAnchor.constraint(equalTo: descriptionTextField.bottomAnchor, constant: 12).isActive = true
-//        imageView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-//        imageView.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: descriptionTextField.bottomAnchor, constant: 12).isActive = true
+        collectionView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        imageLayout = collectionView.heightAnchor.constraint(equalToConstant: 0)
+        imageLayout?.isActive = true
+        collectionView.isHidden = true
         
         imageButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        imageButton.topAnchor.constraint(equalTo: descriptionTextField.bottomAnchor, constant: 12).isActive = true
+        imageButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 12).isActive = true
         imageButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         imageButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
@@ -153,8 +196,132 @@ class AddMenuItemController : UIViewController, UIImagePickerControllerDelegate,
         } else {
             let userID = Auth.auth().currentUser?.uid
             let ref = Database.database().reference().child("dishes")
-            ref.childByAutoId().setValue(["userID" : userID, "name" : name, "description" : desc])
+            let newMenuItem = ref.childByAutoId()
+            newMenuItem.setValue(["userID" : userID, "name" : name, "description" : desc])
+            
+            let imgRef = Database.database().reference().child("dishImages")
+            
+            let storage = Storage.storage().reference().child("images/")
+            var count = 1
+            let key = newMenuItem.key
+            
+            for image in images {
+                
+                let imageRef = storage.child(key + String(count))
+                if let data = UIImagePNGRepresentation(image) {
+                    imageRef.putData(data).observe(.success) { (snapshot) in
+                        if let downloadURL = snapshot.metadata?.downloadURL()?.absoluteString {
+                            imgRef.childByAutoId().setValue(["id" : downloadURL, "menuID" : key])
+                        }
+                    }
+                }
+                count = count + 1
+            }
+            
             self.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    @objc
+    func respondToSwipeGesture(gesture: UIGestureRecognizer)
+    {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer
+        {
+            switch swipeGesture.direction
+            {
+            case UISwipeGestureRecognizerDirection.right:
+                if(pageControl.currentPage != 0) {
+                    let indexPath = IndexPath(item: pageControl.currentPage - 1, section: 0)
+                    collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                    pageControl.currentPage -= 1
+                }
+            case UISwipeGestureRecognizerDirection.left:
+                if pageControl.currentPage != images.count - 1 {
+                    let indexPath = IndexPath(item: pageControl.currentPage + 1, section: 0)
+                    collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                    pageControl.currentPage += 1
+                }
+            case UISwipeGestureRecognizerDirection.up:
+                if(images.count != 0) {
+                    images.remove(at: pageControl.currentPage)
+                    collectionView.reloadData()
+                    pageControl.numberOfPages -= 1
+                    pageControl.currentPage -= 1;
+                    if(images.count == 0) {
+                        imageLayout?.constant = 0
+                        collectionView.isHidden = true
+                    }
+                }
+            default:
+                break
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return images.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! foodImage
+
+        cell.setImage(newImage: images[(indexPath as NSIndexPath).item])
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 200)
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        //        print(UIDevice.current.orientation.isLandscape)
+        
+        collectionView.collectionViewLayout.invalidateLayout()
+        
+        let indexPath = IndexPath(item: pageControl.currentPage, section: 0)
+        //scroll to indexPath after the rotation is going
+        DispatchQueue.main.async {
+            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            self.collectionView.reloadData()
+        }
+    }
+    
+    fileprivate func registerCells() {
+        collectionView.register(foodImage.self, forCellWithReuseIdentifier: "cellId")
+    }
+    
+}
+
+class foodImage: UICollectionViewCell {
+    
+    var imageHeight: NSLayoutConstraint?
+    
+    func setImage(newImage : UIImage) {
+        image.image = newImage
+    }
+    
+    var image: UIImageView = {
+        let newImage = UIImageView()
+        newImage.translatesAutoresizingMaskIntoConstraints = false
+        newImage.contentMode = .scaleAspectFill
+        newImage.clipsToBounds = true
+        return newImage
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addSubview(image)
+        
+        image.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        image.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        image.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        imageHeight = image.heightAnchor.constraint(equalToConstant: 200)
+        imageHeight?.isActive = true
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

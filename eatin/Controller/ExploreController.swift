@@ -23,6 +23,7 @@ class Post {
     var price: String?
     var availability: String?
     var emblems: String?
+    var userID: String?
 }
 
 class ExploreController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
@@ -32,34 +33,11 @@ class ExploreController: UICollectionViewController, UICollectionViewDelegateFlo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let postGoat = Post()
-        postGoat.name = "Goat McGoat"
-        postGoat.statusTitle = "The Best Grass"
-        postGoat.statusText = "Come get your grass, best grass"
-        postGoat.profileImageName = "goat"
-        postGoat.rating = 3
-        postGoat.statusImageName = "grass"
-        postGoat.price = "$$$$"
-        postGoat.availability = "MWF"
-        postGoat.emblems = "GF"
-        
-        let postSheep = Post()
-        postSheep.name = "Sheep mcSheep"
-        postSheep.statusTitle = "The Second Best Grass"
-        postSheep.statusText = "BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA BAAAA BAA BAAAA BAA BAAAAABAAA ABAAA"
-        postSheep.profileImageName = "sheep"
-        postSheep.rating = 4
-        postSheep.statusImageName = "grass2"
-        postSheep.price = "$"
-        postSheep.availability = "Sat"
-        postSheep.emblems = "Hot"
-        
-        posts.append(postGoat)
-        posts.append(postSheep)
-        
         view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
         
         self.title = "Explore"
+        
+        getMeals()
         
         collectionView?.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
@@ -68,6 +46,28 @@ class ExploreController: UICollectionViewController, UICollectionViewDelegateFlo
         collectionView?.alwaysBounceVertical = true
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(filterController))
+    }
+    
+    func getMeals() {
+        let ref = Database.database().reference().child("dishes")
+        ref.observeSingleEvent(of: .value, with: { snapshot in
+            for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                print("one")
+                let value = rest.value as? NSDictionary
+                let post = Post()
+                post.name = "hello"
+                post.statusTitle = value?["name"] as? String
+                post.statusText = value?["description"] as? String
+                post.rating = 3
+                post.statusImageName = "grass"
+                post.price = "$$$$"
+                post.availability = "MWF"
+                post.emblems = "GF"
+                post.userID = value?["userID"] as? String
+                self.posts.append(post)
+            }
+            self.collectionView?.reloadData()
+        })
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -301,9 +301,52 @@ class FeedCell: UICollectionViewCell {
         addConstraintsWithFormat("V:[v0(44)]|", views: saveButton)
         addConstraintsWithFormat("V:[v0(44)]|", views: shareButton)
         
+        connectButton.addTarget(self, action: #selector(connect), for: .touchUpInside)
+    }
+    
+    @objc
+    func connect() {
+        let chatController = chatlogController(collectionViewLayout: UICollectionViewFlowLayout())
+        let nav = UINavigationController(rootViewController: chatController)
+        UIApplication.shared.keyWindow?.rootViewController?.present(nav, animated: true)
     }
     
 }
+
+class exploreImage: UICollectionViewCell {
+    
+    var imageHeight: NSLayoutConstraint?
+    
+    func setImage(newImage : UIImage) {
+        image.image = newImage
+    }
+    
+    var image: UIImageView = {
+        let newImage = UIImageView()
+        newImage.translatesAutoresizingMaskIntoConstraints = false
+        newImage.contentMode = .scaleAspectFill
+        newImage.clipsToBounds = true
+        return newImage
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addSubview(image)
+        
+        image.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        image.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        image.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        imageHeight = image.heightAnchor.constraint(equalToConstant: 200)
+        imageHeight?.isActive = true
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 
 extension UIView {
     

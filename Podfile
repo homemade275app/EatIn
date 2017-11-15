@@ -7,6 +7,7 @@ use_frameworks!
 
 pod 'Bolts'
 pod 'Firebase'
+pod 'Firebase/Storage'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'FBSDKCoreKit'
