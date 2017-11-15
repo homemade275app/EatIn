@@ -11,7 +11,9 @@ import Firebase
 import FirebaseAuth
 import FBSDKLoginKit
 
-class InboxController: UIViewController {
+class InboxController: UITableViewController {
+    let cellid = "cellid"
+    var users = [Message]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,12 +37,33 @@ class InboxController: UIViewController {
     }
     func observeMessage(){
         
-           let ref = Database.database().reference().child("messages")
-            ref.observe(.childAdded, with: {(snapshot) in
-                print(snapshot)
-                    
-            }, withCancel: nil)
-        }
+        
+        
+        Database.database().reference().child("users").observeSingleEvent(of: .value, with: {(snapshot) in
+            
+            for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                let message = Message()
+                let value = rest.value as? NSDictionary
+                message.text = value?["text"] as? String
+                self.users.append(message)
+                
+                self.tableView.reloadData()
+                
+            }
+        }, withCancel: nil)
+    }
+    @objc func handleCancel(){
+        dismiss(animated: true, completion: nil)
+    }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return users.count
+    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellid)
+        let user = users[indexPath.row]
+        cell.textLabel?.text = user.name
+        return cell
+    }
     
     @objc func handlechatLogController(){
         let chatcogcontroller = chatlogController(collectionViewLayout: UICollectionViewFlowLayout())
