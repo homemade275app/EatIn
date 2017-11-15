@@ -46,6 +46,7 @@ class InboxController: UITableViewController {
                 let message = Message()
                 let value = rest.value as? NSDictionary
                 message.text = value?["text"] as? String
+                message.toId = value?["toId"] as? String
                 self.mess.append(message)
                 
                 self.tableView.reloadData()
@@ -62,7 +63,8 @@ class InboxController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellid)
         let message = mess[indexPath.row]
-        cell.textLabel?.text = message.text
+        cell.textLabel?.text = message.toId
+        cell.detailTextLabel?.text = message.text
         return cell
     }
     
