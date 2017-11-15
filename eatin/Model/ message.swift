@@ -8,5 +8,8 @@
 
 import UIKit
 class Message: NSObject {
-
+    var fromId: String?
+    var toId: String?
+    var timestamp: NSNumber?
+    var text: String?
 }

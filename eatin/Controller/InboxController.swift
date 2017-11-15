@@ -11,7 +11,9 @@ import Firebase
 import FirebaseAuth
 import FBSDKLoginKit
 
-class InboxController: UIViewController {
+class InboxController: UITableViewController {
+    let cellid = "cellid"
+    var mess = [Message]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,15 +34,39 @@ class InboxController: UIViewController {
         
         self.title = "Inbox"
         observeMessage()
+        
     }
     func observeMessage(){
         
-           let ref = Database.database().reference().child("messages")
-            ref.observe(.childAdded, with: {(snapshot) in
-                print(snapshot)
-                    
-            }, withCancel: nil)
-        }
+        
+        
+        Database.database().reference().child("messages").observeSingleEvent(of: .value, with: {(snapshot) in
+            
+            for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                let message = Message()
+                let value = rest.value as? NSDictionary
+                message.text = value?["text"] as? String
+                message.toId = value?["toId"] as? String
+                self.mess.append(message)
+                
+                self.tableView.reloadData()
+                
+            }
+        }, withCancel: nil)
+    }
+    @objc func handleCancel(){
+        dismiss(animated: true, completion: nil)
+    }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return mess.count
+    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellid)
+        let message = mess[indexPath.row]
+        cell.textLabel?.text = message.toId
+        cell.detailTextLabel?.text = message.text
+        return cell
+    }
     
     @objc func handlechatLogController(){
         let chatcogcontroller = chatlogController(collectionViewLayout: UICollectionViewFlowLayout())

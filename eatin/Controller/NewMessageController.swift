@@ -19,14 +19,17 @@ class NewMessageController: UITableViewController {
         fetchUser()
 }
     func fetchUser(){
-        Database.database().reference().child("users").observe(.childAdded, with: {(DataSnapshot) in
-            if let Dictionary = DataSnapshot.value as? [String: AnyObject]{
+        
+        Database.database().reference().child("users").observeSingleEvent(of: .value, with: {(snapshot) in
+            
+            for rest in snapshot.children.allObjects as! [DataSnapshot] {
                 let user = User()
-                user.setValuesForKeys(Dictionary)
+                let value = rest.value as? NSDictionary
+                user.name = value?["name"] as? String
                 self.users.append(user)
-                DispatchQueue.main.async{
+                
                 self.tableView.reloadData()
-                }
+                
             }
         }, withCancel: nil)
     }

@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 class chatlogController: UICollectionViewController{
+    let toId = "86YYutqGOdUWcUROJkPqLDzT8142"
     
     let inputTextField: UITextField = {
         let Field = UITextField()
@@ -114,7 +115,7 @@ class chatlogController: UICollectionViewController{
     // Create Handlesend method for adding a target to send botton
     @objc func handleSend(){
         let user = User()
-        let userinputRecipiant = inputRecipiant.text
+        /*let userinputRecipiant = inputRecipiant.text
         Database.database().reference().child("users").observe(.childAdded, with: {(DataSnapshot) in
             if let Dictionary = DataSnapshot.value as? [String: AnyObject]{
                 //let user = User()
@@ -126,12 +127,13 @@ class chatlogController: UICollectionViewController{
                     print("error")
                     }}
             }
-        }, withCancel: nil)
+        }, withCancel: nil)*/
+        
         let ref = Database.database().reference().child("messages")
         let childRef = ref.childByAutoId()
         let fromId = Auth.auth().currentUser?.uid
         
-        let toId = user.id
+        
         let timestamp = Int(NSDate().timeIntervalSince1970)
         let values = ["text": inputTextField.text!, "toId": toId,"fromID": fromId, "timestamp": timestamp] as [String : Any]
         childRef.updateChildValues(values)
