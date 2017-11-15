@@ -13,7 +13,7 @@ import FBSDKLoginKit
 
 class InboxController: UITableViewController {
     let cellid = "cellid"
-    var users = [Message]()
+    var mess = [Message]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,18 +34,19 @@ class InboxController: UITableViewController {
         
         self.title = "Inbox"
         observeMessage()
+        
     }
     func observeMessage(){
         
         
         
-        Database.database().reference().child("users").observeSingleEvent(of: .value, with: {(snapshot) in
+        Database.database().reference().child("messages").observeSingleEvent(of: .value, with: {(snapshot) in
             
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
                 let message = Message()
                 let value = rest.value as? NSDictionary
                 message.text = value?["text"] as? String
-                self.users.append(message)
+                self.mess.append(message)
                 
                 self.tableView.reloadData()
                 
@@ -56,12 +57,12 @@ class InboxController: UITableViewController {
         dismiss(animated: true, completion: nil)
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return mess.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellid)
-        let user = users[indexPath.row]
-        cell.textLabel?.text = user.name
+        let message = mess[indexPath.row]
+        cell.textLabel?.text = message.text
         return cell
     }
     
