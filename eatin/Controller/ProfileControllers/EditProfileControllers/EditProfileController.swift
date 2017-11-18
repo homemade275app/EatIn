@@ -25,8 +25,8 @@ class EditProfileController: UIViewController {
         
         self.view.addSubview(nameLabel)
         self.view.addSubview(nameTextField)
-        self.view.addSubview(cityLabel)
-        self.view.addSubview(cityTextField)
+        self.view.addSubview(zipLabel)
+        self.view.addSubview(zipTextField)
 
         
         addLabels()
@@ -58,26 +58,26 @@ class EditProfileController: UIViewController {
         return nameTextField
     }()
     
-    let cityLabel: UILabel = {
-        let cityLabel = UILabel()
-        cityLabel.translatesAutoresizingMaskIntoConstraints = false
-        cityLabel.textAlignment = .left
-        cityLabel.textColor = .orange
-        cityLabel.text = "City"
-        return cityLabel
+    let zipLabel: UILabel = {
+        let zipLabel = UILabel()
+        zipLabel.translatesAutoresizingMaskIntoConstraints = false
+        zipLabel.textAlignment = .left
+        zipLabel.textColor = .orange
+        zipLabel.text = "ZIP Code"
+        return zipLabel
     }()
     
-    let cityTextField: UITextField = {
-        let cityTextField = UITextField()
-        cityTextField.placeholder = "Enter City"
-        cityTextField.translatesAutoresizingMaskIntoConstraints = false
-        return cityTextField
+    let zipTextField: UITextField = {
+        let zipTextField = UITextField()
+        zipTextField.placeholder = "Enter ZIP Code"
+        zipTextField.translatesAutoresizingMaskIntoConstraints = false
+        return zipTextField
     }()
     
     
     @objc func saveButtonAction(sender: UIButton!) {
         
-        print("Save was pressed")
+     //   print("Save was pressed")
 
         //1. If it's not empty. Save value entered into database
         
@@ -109,14 +109,24 @@ class EditProfileController: UIViewController {
 
         }
         //2. If it's empty. Save the placeholder into the database
-        if let text = cityTextField.text, !text.isEmpty
+        if let text = zipTextField.text, !text.isEmpty
         {
             //do something if it's not empty
-            print("City field text: " + cityTextField.text!)
-            //users city in database updated to cityTextField.text
+            print("Zip field text: " + zipTextField.text!)
+     
+            //users zip in database updated to zipTextField.text
+            let zip = zipTextField.text
+            
+            //update zip in database
+            let ref = Database.database().reference()
+            guard let uid = Auth.auth().currentUser?.uid else {
+                return
+            }
+            let usersReference = ref.child("users").child(uid)
+            usersReference.updateChildValues(["zip": zip])
         }
         else{
-            print("City field is empty")
+            print("Zip field is empty")
             
         }
 
@@ -141,15 +151,15 @@ class EditProfileController: UIViewController {
         nameTextField.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         nameTextField.heightAnchor.constraint(equalToConstant: 75).isActive = true
         
-        cityLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        cityLabel.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 12).isActive = true
-        cityLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        cityLabel.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        zipLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        zipLabel.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 12).isActive = true
+        zipLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        zipLabel.heightAnchor.constraint(equalToConstant: 75).isActive = true
         
-        cityTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        cityTextField.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 12).isActive = true
-        cityTextField.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        cityTextField.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        zipTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        zipTextField.topAnchor.constraint(equalTo: zipLabel.bottomAnchor, constant: 12).isActive = true
+        zipTextField.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        zipTextField.heightAnchor.constraint(equalToConstant: 75).isActive = true
         
         
     }

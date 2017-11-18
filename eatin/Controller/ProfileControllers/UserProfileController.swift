@@ -22,7 +22,7 @@ class UserProfileController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonAction))
         
         self.view.addSubview(nameLabel)
-        self.view.addSubview(cityLabel)
+        self.view.addSubview(zipLabel)
 
         setLabelText()
         addLabels()
@@ -40,21 +40,23 @@ class UserProfileController: UIViewController {
         let ref = Database.database().reference()
         let userID = Auth.auth().currentUser?.uid
         if(userID != nil) {
+            
+            
             ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 
                 //Set name label
-                let username = value?["name"] as? String ?? "Profile"
+                let username = value?["name"] as? String ?? "Name"
                 self.nameLabel.text = username
                 
-                //Set city label
-                let city = value?["city"] as? String ?? "City"
-                if(city != ""){
-                    self.cityLabel.text = city
+                //Set zip label
+                let zip = value?["zip"] as? String ?? "ZIP Code"
+                if(zip != ""){
+                    self.zipLabel.text = zip
                 
                 }
                 else{
-                    self.cityLabel.text = "City"
+                    self.zipLabel.text = "ZIP Code"
                 }
                 
             }) { (error) in
@@ -77,12 +79,12 @@ class UserProfileController: UIViewController {
         return nameLabel
     }()
     
-    let cityLabel: UILabel = {
-        let cityLabel = UILabel()
-        cityLabel.translatesAutoresizingMaskIntoConstraints = false
-        cityLabel.textAlignment = .center
-        cityLabel.textColor = .orange
-        return cityLabel
+    let zipLabel: UILabel = {
+        let zipLabel = UILabel()
+        zipLabel.translatesAutoresizingMaskIntoConstraints = false
+        zipLabel.textAlignment = .center
+        zipLabel.textColor = .orange
+        return zipLabel
     }()
     
 
@@ -94,10 +96,10 @@ class UserProfileController: UIViewController {
         nameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         nameLabel.heightAnchor.constraint(equalToConstant: 75).isActive = true
         
-        cityLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        cityLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 12).isActive = true
-        cityLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        cityLabel.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        zipLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        zipLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 12).isActive = true
+        zipLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        zipLabel.heightAnchor.constraint(equalToConstant: 75).isActive = true
         
 
     }
