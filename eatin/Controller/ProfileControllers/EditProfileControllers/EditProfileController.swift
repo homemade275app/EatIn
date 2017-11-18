@@ -75,6 +75,59 @@ class EditProfileController: UIViewController {
     }()
     
     
+    @objc func saveButtonAction(sender: UIButton!) {
+        
+        print("Save was pressed")
+
+        //1. If it's not empty. Save value entered into database
+        
+        
+        
+        
+      
+        
+        if let text = nameTextField.text, !text.isEmpty
+        {
+            //do something if it's not empty
+            //users name in database updated to nameTextField.text
+            let name = nameTextField.text
+        
+            //update name in database
+            let ref = Database.database().reference()
+            guard let uid = Auth.auth().currentUser?.uid else {
+                return
+            }
+            let usersReference = ref.child("users").child(uid)
+            usersReference.updateChildValues(["name": name])
+      
+
+        }
+            
+        
+        else{
+            print("Name field is empty")
+
+        }
+        //2. If it's empty. Save the placeholder into the database
+        if let text = cityTextField.text, !text.isEmpty
+        {
+            //do something if it's not empty
+            print("City field text: " + cityTextField.text!)
+            //users city in database updated to cityTextField.text
+        }
+        else{
+            print("City field is empty")
+            
+        }
+
+        
+        
+        //3. then handle return (complete)
+        handleReturn()
+        
+    }
+    
+    
     
     
     func addLabels() {
@@ -103,14 +156,7 @@ class EditProfileController: UIViewController {
     
     
     
-    @objc func saveButtonAction(sender: UIButton!) {
-
-        //1. Save values of existing user to database (incomplete)
-        
-        //2. then handle return (complete)
-        handleReturn()
-        
-    }
+ 
     
     
 }

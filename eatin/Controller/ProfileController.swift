@@ -75,7 +75,7 @@ class ProfileController: UIViewController, MFMailComposeViewControllerDelegate {
         feedbackButton.layer.borderWidth = 2
         feedbackButton.translatesAutoresizingMaskIntoConstraints = false
         feedbackButton.layer.borderColor = UIColor.orange.cgColor
-        feedbackButton.setTitle("Give Us Feedback", for: .normal)
+        feedbackButton.setTitle("Give Feedback", for: .normal)
         feedbackButton.setTitleColor(UIColor.orange, for: .normal)
         feedbackButton.addTarget(self, action: #selector(feedbackButtonAction), for: .touchUpInside)
         return feedbackButton
@@ -88,7 +88,7 @@ class ProfileController: UIViewController, MFMailComposeViewControllerDelegate {
         helpButton.layer.borderWidth = 2
         helpButton.translatesAutoresizingMaskIntoConstraints = false
         helpButton.layer.borderColor = UIColor.orange.cgColor
-        helpButton.setTitle("Help", for: .normal)
+        helpButton.setTitle("Get Help", for: .normal)
         helpButton.setTitleColor(UIColor.orange, for: .normal)
         helpButton.addTarget(self, action: #selector(helpButtonAction), for: .touchUpInside)
         return helpButton
