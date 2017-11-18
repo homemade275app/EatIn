@@ -45,16 +45,16 @@ class ProfileController: UIViewController, MFMailComposeViewControllerDelegate {
         return notificationsButton
     }()
     
-    let becomeAChefButton: UIButton = {
-        let becomeAChefButton = UIButton()
-        becomeAChefButton.backgroundColor = .clear
-        becomeAChefButton.layer.cornerRadius = 5
-        becomeAChefButton.layer.borderWidth = 2
-        becomeAChefButton.translatesAutoresizingMaskIntoConstraints = false
-        becomeAChefButton.layer.borderColor = UIColor.orange.cgColor
-        becomeAChefButton.setTitleColor(UIColor.orange, for: .normal)
-        return becomeAChefButton
-    }()
+//    let becomeAChefButton: UIButton = {
+//        let becomeAChefButton = UIButton()
+//        becomeAChefButton.backgroundColor = .clear
+//        becomeAChefButton.layer.cornerRadius = 5
+//        becomeAChefButton.layer.borderWidth = 2
+//        becomeAChefButton.translatesAutoresizingMaskIntoConstraints = false
+//        becomeAChefButton.layer.borderColor = UIColor.orange.cgColor
+//        becomeAChefButton.setTitleColor(UIColor.orange, for: .normal)
+//        return becomeAChefButton
+//    }()
     
     let feedbackButton: UIButton = {
         let feedbackButton = UIButton()
@@ -109,11 +109,11 @@ class ProfileController: UIViewController, MFMailComposeViewControllerDelegate {
         
         view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
         
-        self.title = "Profile"
+        self.title = "Account"
         
         self.view.addSubview(profileButton)
         self.view.addSubview(notificationsButton)
-        self.view.addSubview(becomeAChefButton)
+//        self.view.addSubview(becomeAChefButton)
         self.view.addSubview(feedbackButton)
         self.view.addSubview(helpButton)
         self.view.addSubview(settingsButton)
@@ -132,12 +132,12 @@ class ProfileController: UIViewController, MFMailComposeViewControllerDelegate {
         notificationsButton.topAnchor.constraint(equalTo: profileButton.bottomAnchor, constant: 12).isActive = true
         notificationsButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         notificationsButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
-        
-        becomeAChefButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        becomeAChefButton.topAnchor.constraint(equalTo: notificationsButton.bottomAnchor, constant: 12).isActive = true
-        becomeAChefButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        becomeAChefButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
-        
+//
+//        becomeAChefButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        becomeAChefButton.topAnchor.constraint(equalTo: notificationsButton.bottomAnchor, constant: 12).isActive = true
+//        becomeAChefButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+//        becomeAChefButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
+//
         feedbackButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         feedbackButton.topAnchor.constraint(equalTo: notificationsButton.bottomAnchor, constant: 12).isActive = true
         feedbackButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
@@ -164,17 +164,14 @@ class ProfileController: UIViewController, MFMailComposeViewControllerDelegate {
         present(notificationsController, animated: true, completion: nil)
     }
     
-    @objc func becomeAChefButtonAction(sender: UIButton!) {
-        let becomeAChefController = UINavigationController(rootViewController: BecomeAChefController())
-        present(becomeAChefController, animated: true, completion: nil)
-    }
+//    @objc func becomeAChefButtonAction(sender: UIButton!) {
+//        let becomeAChefController = UINavigationController(rootViewController: BecomeAChefController())
+//        present(becomeAChefController, animated: true, completion: nil)
+//    }
     
     @objc func feedbackButtonAction(sender: UIButton!) {
-        if MFMailComposeViewController.canSendMail() {
-            present(mail, animated: true)
-        } else {
-            print("Device cannot send mail")
-        }
+        let feedbackController = UINavigationController(rootViewController: FeedbackController())
+        present(feedbackController, animated: true, completion: nil)
     }
     
     @objc

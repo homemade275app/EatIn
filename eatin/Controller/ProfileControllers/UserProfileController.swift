@@ -15,7 +15,8 @@ class UserProfileController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = "Profile"
+
         view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Return", style: .plain, target: self, action: #selector(handleReturn))

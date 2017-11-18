@@ -40,6 +40,7 @@
 		64F0A8C11FAA317D009D57CF /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0A8C01FAA317D009D57CF /* ChatLogController.swift */; };
 		E88056141FB66B2A00C23464 /* FilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88056131FB66B2A00C23464 /* FilterController.swift */; };
 		EFDF16411FB39E54000BE480 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDF16401FB39E54000BE480 /* EditProfileController.swift */; };
+		EFEC4EFD1FC0AD05002F4914 /* FeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEC4EFC1FC0AD05002F4914 /* FeedbackController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		860F9A01FDCB9B7D872F6020 /* Pods-eatin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eatin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eatin/Pods-eatin.debug.xcconfig"; sourceTree = "<group>"; };
 		E88056131FB66B2A00C23464 /* FilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; };
 		EFDF16401FB39E54000BE480 /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
+		EFEC4EFC1FC0AD05002F4914 /* FeedbackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			children = (
 				EF0495FD1FADE1FE00DDD05B /* EditProfileControllers */,
 				4243FC3D1F9983A700298BC4 /* UserProfileController.swift */,
+				EFEC4EFC1FC0AD05002F4914 /* FeedbackController.swift */,
 				4243FC3F1F998A2D00298BC4 /* NotificationsController.swift */,
 				4243FC411F998AB600298BC4 /* BecomeAChefController.swift */,
 				4243FC451F998ACF00298BC4 /* HelpController.swift */,
@@ -359,6 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFEC4EFD1FC0AD05002F4914 /* FeedbackController.swift in Sources */,
 				428FBCCE1F8E917F004E82DE /* ViewController.swift in Sources */,
 				426FCC1E1F8FDFAA00DDE8F2 /* InboxController.swift in Sources */,
 				64F0A8C11FAA317D009D57CF /* ChatLogController.swift in Sources */,
