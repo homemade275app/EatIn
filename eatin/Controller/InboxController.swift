@@ -63,7 +63,16 @@ class InboxController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellid)
         let message = mess[indexPath.row]
-        cell.textLabel?.text = message.toId
+        if let toId = message.toId{
+            let ref = Database.database().reference().child("users").child(toId)
+            ref.observeSingleEvent(of: .value, with: {(snapshot) in
+                if let dictionary = snapshot.value as? [String: AnyObject]{
+                    cell.textLabel?.text = dictionary["name"] as? String
+                }
+                
+            }, withCancel: nil)
+        }
+        //cell.textLabel?.text = message.toId
         cell.detailTextLabel?.text = message.text
         return cell
     }
