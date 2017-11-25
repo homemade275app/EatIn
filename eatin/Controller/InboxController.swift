@@ -33,6 +33,8 @@ class InboxController: UITableViewController {
 //            , withCancel: nil)
         
         self.title = "Inbox"
+        
+        tableView.register(UserCell.self, forCellReuseIdentifier: cellid)
         observeMessage()
         
     }
@@ -61,7 +63,9 @@ class InboxController: UITableViewController {
         return mess.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellid)
+        //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellid)
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellid, for: indexPath)
         let message = mess[indexPath.row]
         if let toId = message.toId{
             let ref = Database.database().reference().child("users").child(toId)

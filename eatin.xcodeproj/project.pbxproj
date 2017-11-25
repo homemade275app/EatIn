@@ -34,6 +34,7 @@
 		42DD64221F984D2E007487B9 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42DD64251F984D2E007487B9 /* FBSDKLoginKit.framework */; };
 		42DD64231F984D2E007487B9 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42DD64261F984D2E007487B9 /* FBSDKShareKit.framework */; };
 		42DD64281F9946EF007487B9 /* IntroController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DD64271F9946EF007487B9 /* IntroController.swift */; };
+		641036831FC90BA4005EEC17 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641036821FC90BA4005EEC17 /* UserCell.swift */; };
 		648608301FB3784500E4A9D5 /*  message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6486082F1FB3784500E4A9D5 /*  message.swift */; };
 		64F0A8B81FA978B3009D57CF /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0A8B71FA978B3009D57CF /* NewMessageController.swift */; };
 		64F0A8BF1FA99804009D57CF /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0A8BE1FA99804009D57CF /* user.swift */; };
@@ -73,6 +74,7 @@
 		42DD64251F984D2E007487B9 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42DD64261F984D2E007487B9 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42DD64271F9946EF007487B9 /* IntroController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroController.swift; sourceTree = "<group>"; };
+		641036821FC90BA4005EEC17 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		6486082F1FB3784500E4A9D5 /*  message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " message.swift"; sourceTree = "<group>"; };
 		64F0A8B71FA978B3009D57CF /* NewMessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
 		64F0A8BE1FA99804009D57CF /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		428FBCCA1F8E917F004E82DE /* eatin */ = {
 			isa = PBXGroup;
 			children = (
+				641036811FC90B41005EEC17 /* veiw */,
 				64F0A8B91FA99639009D57CF /* Model */,
 				428FBCDE1F8E9697004E82DE /* Controller */,
 				428FBCCB1F8E917F004E82DE /* AppDelegate.swift */,
@@ -176,6 +179,14 @@
 				E88056131FB66B2A00C23464 /* FilterController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		641036811FC90B41005EEC17 /* veiw */ = {
+			isa = PBXGroup;
+			children = (
+				641036821FC90BA4005EEC17 /* UserCell.swift */,
+			);
+			path = veiw;
 			sourceTree = "<group>";
 		};
 		64F0A8B91FA99639009D57CF /* Model */ = {
@@ -367,6 +378,7 @@
 				426FCC1E1F8FDFAA00DDE8F2 /* InboxController.swift in Sources */,
 				64F0A8C11FAA317D009D57CF /* ChatLogController.swift in Sources */,
 				4224EC1C1F9F9801003B5F11 /* ChefMenuController.swift in Sources */,
+				641036831FC90BA4005EEC17 /* UserCell.swift in Sources */,
 				42DD64281F9946EF007487B9 /* IntroController.swift in Sources */,
 				426FCC181F8FDF2B00DDE8F2 /* ExploreController.swift in Sources */,
 				4243FC481F998ADD00298BC4 /* SettingsController.swift in Sources */,
