@@ -44,6 +44,8 @@ class InboxController: UITableViewController {
         
         self.title = "Inbox"
         
+        tableView.register(UserCell.self, forCellReuseIdentifier: cellid)
+        
         observeUserMessages()
 
     }
@@ -107,13 +109,15 @@ class InboxController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellid)
-        let message = mess[indexPath.row]
         
+        //let cell = tableView.dequeueReusableCell(withIdentifier: cellid, for: indexPath)
+        let message = mess[indexPath.row]
         Database.database().reference().child("users").child(message.chatPartnerId()!).observeSingleEvent(of: .value, with: {(snapshot) in
             let value = snapshot.value as? NSDictionary
             cell.textLabel?.text = value?["name"] as? String
-            if(value?["profileImageUrl"] as? String != nil && value?["profileImageUrl"] as? String != "") {
-                let storageRef = Storage.storage().reference(forURL: value?["profileImageUrl"] as! String)
+            
+            if(value!["profileImageUrl"] as? String != nil && value!["profileImageUrl"] as? String != "") {
+                let storageRef = Storage.storage().reference(forURL: value!["profileImageUrl"] as! String)
                 storageRef.getData(maxSize: 1 * 2048 * 2048) { (data, error) -> Void in
                     if (error != nil) {
                         print(error ?? "error")
@@ -125,7 +129,6 @@ class InboxController: UITableViewController {
                 cell.imageView?.image = UIImage(named: "profile")
             }
         })
-        
         cell.detailTextLabel?.text = message.text
         return cell
     }

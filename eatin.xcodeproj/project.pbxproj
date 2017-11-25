@@ -10,6 +10,7 @@
 		379F76E5CB188E8CD8A8371C /* Pods_eatin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 686F2035FEAEED40B82E2812 /* Pods_eatin.framework */; };
 		421A972C1FC628CC000923C3 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421A972A1FC628CC000923C3 /* ChatMessageCell.swift */; };
 		421A972D1FC628CC000923C3 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421A972B1FC628CC000923C3 /* UserCell.swift */; };
+		421A97321FC9D7B8000923C3 /* message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421A97311FC9D7B8000923C3 /* message.swift */; };
 		4224EC1C1F9F9801003B5F11 /* ChefMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224EC1B1F9F9801003B5F11 /* ChefMenuController.swift */; };
 		4224EC1E1F9FE2FF003B5F11 /* AddMenuItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224EC1D1F9FE2FF003B5F11 /* AddMenuItemController.swift */; };
 		4243FC3E1F9983A700298BC4 /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243FC3D1F9983A700298BC4 /* UserProfileController.swift */; };
@@ -36,7 +37,6 @@
 		42DD64221F984D2E007487B9 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42DD64251F984D2E007487B9 /* FBSDKLoginKit.framework */; };
 		42DD64231F984D2E007487B9 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42DD64261F984D2E007487B9 /* FBSDKShareKit.framework */; };
 		42DD64281F9946EF007487B9 /* IntroController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DD64271F9946EF007487B9 /* IntroController.swift */; };
-		648608301FB3784500E4A9D5 /* message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6486082F1FB3784500E4A9D5 /* message.swift */; };
 		64F0A8B81FA978B3009D57CF /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0A8B71FA978B3009D57CF /* NewMessageController.swift */; };
 		64F0A8BF1FA99804009D57CF /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0A8BE1FA99804009D57CF /* user.swift */; };
 		64F0A8C11FAA317D009D57CF /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0A8C01FAA317D009D57CF /* ChatLogController.swift */; };
@@ -49,6 +49,7 @@
 		40E3CA73F5352F70CE805D0C /* Pods-eatin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eatin.release.xcconfig"; path = "Pods/Target Support Files/Pods-eatin/Pods-eatin.release.xcconfig"; sourceTree = "<group>"; };
 		421A972A1FC628CC000923C3 /* ChatMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		421A972B1FC628CC000923C3 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		421A97311FC9D7B8000923C3 /* message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = message.swift; sourceTree = "<group>"; };
 		4224EC1B1F9F9801003B5F11 /* ChefMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefMenuController.swift; sourceTree = "<group>"; };
 		4224EC1D1F9FE2FF003B5F11 /* AddMenuItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMenuItemController.swift; sourceTree = "<group>"; };
 		4243FC3D1F9983A700298BC4 /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
@@ -77,7 +78,7 @@
 		42DD64251F984D2E007487B9 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42DD64261F984D2E007487B9 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42DD64271F9946EF007487B9 /* IntroController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroController.swift; sourceTree = "<group>"; };
-		6486082F1FB3784500E4A9D5 /* message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = message.swift; sourceTree = "<group>"; };
+		641036821FC90BA4005EEC17 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		64F0A8B71FA978B3009D57CF /* NewMessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
 		64F0A8BE1FA99804009D57CF /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 		64F0A8C01FAA317D009D57CF /* ChatLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
@@ -142,6 +143,7 @@
 				428FBCC91F8E917F004E82DE /* Products */,
 				F3BE7F392787ABF3C37D3D53 /* Pods */,
 				E4CE50F0DF394369E8EAB3B8 /* Frameworks */,
+				421A97301FC9D771000923C3 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -196,7 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				64F0A8BE1FA99804009D57CF /* user.swift */,
-				6486082F1FB3784500E4A9D5 /* message.swift */,
+				421A97311FC9D7B8000923C3 /* message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -381,6 +383,7 @@
 				426FCC1E1F8FDFAA00DDE8F2 /* InboxController.swift in Sources */,
 				64F0A8C11FAA317D009D57CF /* ChatLogController.swift in Sources */,
 				4224EC1C1F9F9801003B5F11 /* ChefMenuController.swift in Sources */,
+				641036831FC90BA4005EEC17 /* UserCell.swift in Sources */,
 				42DD64281F9946EF007487B9 /* IntroController.swift in Sources */,
 				421A972C1FC628CC000923C3 /* ChatMessageCell.swift in Sources */,
 				426FCC181F8FDF2B00DDE8F2 /* ExploreController.swift in Sources */,
@@ -402,8 +405,8 @@
 				64F0A8BF1FA99804009D57CF /* user.swift in Sources */,
 				4243FC401F998A2D00298BC4 /* NotificationsController.swift in Sources */,
 				4243FC3E1F9983A700298BC4 /* UserProfileController.swift in Sources */,
-				648608301FB3784500E4A9D5 /* message.swift in Sources */,
 				426FCC201F8FDFC800DDE8F2 /* OrderController.swift in Sources */,
+				421A97321FC9D7B8000923C3 /* message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
