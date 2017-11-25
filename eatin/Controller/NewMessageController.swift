@@ -10,22 +10,25 @@ import FirebaseAuth
 import FBSDKLoginKit
 
 class NewMessageController: UITableViewController {
+    
     let cellid = "cellid"
+    
     var users = [User]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel", style: .plain ,target: self, action: #selector(handleCancel))
         fetchUser()
-}
+    }
     func fetchUser(){
         
         Database.database().reference().child("users").observeSingleEvent(of: .value, with: {(snapshot) in
             
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
-                let user = User()
                 let value = rest.value as? NSDictionary
-                user.name = value?["name"] as? String
+                let user = User(dictionary: value as! [String : Any])
+                user.id = rest.key
                 self.users.append(user)
                 
                 self.tableView.reloadData()
@@ -45,4 +48,5 @@ class NewMessageController: UITableViewController {
         cell.textLabel?.text = user.name
         return cell
     }
+    
 }

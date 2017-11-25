@@ -104,7 +104,7 @@ class LoginController: UIViewController {
             //successfully authenticated user
             let ref = Database.database().reference()
             let usersReference = ref.child("users").child(uid)
-            let values = ["name": name, "email": email, "address": "", "city": "", "state": "", "country": "", "zip": "", "phoneNumber": "", "chefStatus": "0"]
+            let values = ["name": name, "email": email, "address": "", "city": "", "state": "", "country": "", "zip": "", "phoneNumber": "", "chefStatus": "0", "profileImageUrl": ""]
             
             usersReference.updateChildValues(values as Any as! [AnyHashable : Any], withCompletionBlock: { (err, ref) in
                 

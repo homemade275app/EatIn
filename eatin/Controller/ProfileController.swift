@@ -45,17 +45,6 @@ class ProfileController: UIViewController, MFMailComposeViewControllerDelegate {
         return notificationsButton
     }()
     
-//    let becomeAChefButton: UIButton = {
-//        let becomeAChefButton = UIButton()
-//        becomeAChefButton.backgroundColor = .clear
-//        becomeAChefButton.layer.cornerRadius = 5
-//        becomeAChefButton.layer.borderWidth = 2
-//        becomeAChefButton.translatesAutoresizingMaskIntoConstraints = false
-//        becomeAChefButton.layer.borderColor = UIColor.orange.cgColor
-//        becomeAChefButton.setTitleColor(UIColor.orange, for: .normal)
-//        return becomeAChefButton
-//    }()
-    
     let feedbackButton: UIButton = {
         let feedbackButton = UIButton()
         feedbackButton.backgroundColor = .clear
@@ -109,11 +98,8 @@ class ProfileController: UIViewController, MFMailComposeViewControllerDelegate {
         
         view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
         
-        self.title = "Account"
-        
         self.view.addSubview(profileButton)
         self.view.addSubview(notificationsButton)
-//        self.view.addSubview(becomeAChefButton)
         self.view.addSubview(feedbackButton)
         self.view.addSubview(helpButton)
         self.view.addSubview(settingsButton)
@@ -163,11 +149,6 @@ class ProfileController: UIViewController, MFMailComposeViewControllerDelegate {
         let notificationsController = UINavigationController(rootViewController: NotificationsController())
         present(notificationsController, animated: true, completion: nil)
     }
-    
-//    @objc func becomeAChefButtonAction(sender: UIButton!) {
-//        let becomeAChefController = UINavigationController(rootViewController: BecomeAChefController())
-//        present(becomeAChefController, animated: true, completion: nil)
-//    }
     
     @objc func feedbackButtonAction(sender: UIButton!) {
         let feedbackController = UINavigationController(rootViewController: FeedbackController())

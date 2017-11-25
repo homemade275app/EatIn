@@ -20,7 +20,7 @@ class ChefMenuController : UIViewController, UITableViewDelegate, UITableViewDat
     let menuTable : UITableView = {
         let menuTable = UITableView()
         menuTable.backgroundColor = UIColor(r: 255, g: 255, b: 255)
-        menuTable.rowHeight = 50
+        menuTable.rowHeight = 300
         menuTable.translatesAutoresizingMaskIntoConstraints = false
         menuTable.register(menuItem.self, forCellReuseIdentifier: "cell")
         return menuTable
@@ -54,8 +54,6 @@ class ChefMenuController : UIViewController, UITableViewDelegate, UITableViewDat
         self.menuTable.reloadData()
         
         populateTable()
-        
-        menuTable.rowHeight = UITableViewAutomaticDimension
     }
     
     func populateTable() {

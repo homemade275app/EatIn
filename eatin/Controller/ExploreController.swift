@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FBSDKLoginKit
+import FirebaseStorage
 
 let cellId = "cellId"
 
@@ -46,6 +47,8 @@ class ExploreController: UICollectionViewController, UICollectionViewDelegateFlo
         collectionView?.alwaysBounceVertical = true
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(filterController))
+        
+        self.collectionView?.contentInset.bottom = self.tabBarController?.tabBar.frame.height ?? 0
     }
     
     func getMeals() {
@@ -190,6 +193,7 @@ class FeedCell: UICollectionViewCell {
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = UIImage(named: "profile")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -309,18 +313,42 @@ class FeedCell: UICollectionViewCell {
         ref.child("users").child(id!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             self.nameLabel.text = value?["name"] as? String ?? "Profile"
+            if(value?["profileImageUrl"] as? String != nil && value?["profileImageUrl"] as? String != "") {
+                let storageRef = Storage.storage().reference(forURL: value?["profileImageUrl"] as! String)
+                storageRef.getData(maxSize: 1 * 2048 * 2048) { (data, error) -> Void in
+                    if (error != nil) {
+                        print(error ?? "error")
+                    } else {
+                        self.profileImageView.image = UIImage(data: data!)!
+                    }
+                }
+            } else {
+                self.profileImageView.image = UIImage(named: "profile")
+            }
         }) { (error) in
             print(error.localizedDescription)
         }
     }
     
+    var inboxController : InboxController?
+    
     @objc
     func connect() {
+        print("here")
         let id = post?.userID
-        let chatController = chatlogController(collectionViewLayout: UICollectionViewFlowLayout())
-        chatController.toId = id!
-        let nav = UINavigationController(rootViewController: chatController)
-        UIApplication.shared.keyWindow?.rootViewController?.present(nav, animated: true)
+        let ref = Database.database().reference()
+        ref.child("users").child(id!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+
+            let user = User(dictionary: value as! [String : Any])
+            user.id = id
+            
+            let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
+            chatLogController.user = user
+            let navController = UINavigationController(rootViewController: chatLogController)
+            
+            self.window?.rootViewController?.present(navController, animated: true, completion: nil)
+        })
     }
     
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 
 class UserCell: UITableViewCell {
     
@@ -32,15 +33,12 @@ class UserCell: UITableViewCell {
     fileprivate func setupNameAndProfileImage() {
         
         if let id = message?.chatPartnerId() {
-            let ref = FIRDatabase.database().reference().child("users").child(id)
+            let ref = Database.database().reference().child("users").child(id)
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 if let dictionary = snapshot.value as? [String: AnyObject] {
                     self.textLabel?.text = dictionary["name"] as? String
                     
-                    if let profileImageUrl = dictionary["profileImageUrl"] as? String {
-                        self.profileImageView.loadImageUsingCacheWithUrlString(profileImageUrl)
-                    }
                 }
                 
                 }, withCancel: nil)
@@ -58,6 +56,7 @@ class UserCell: UITableViewCell {
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        //imageView.image = UIImage(named: "profile")
         imageView.layer.cornerRadius = 24
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill

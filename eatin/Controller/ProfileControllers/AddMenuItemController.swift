@@ -11,7 +11,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseStorage
 
-class AddMenuItemController : UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class AddMenuItemController : UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var imageLayout: NSLayoutConstraint?
     

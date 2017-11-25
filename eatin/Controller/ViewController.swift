@@ -73,9 +73,13 @@ class ViewController: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        checkIfUserIsLoggedIn()
+        
         let userID = Auth.auth().currentUser?.uid
         
-        if(set == 0 || userID != nil) {
+        if(set == 0 && userID != nil) {
+            pageList = []
+            setupTabs()
             getChefPage()
             set = 1
         }
