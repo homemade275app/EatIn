@@ -26,11 +26,11 @@ class InfoController: UIViewController, UICollectionViewDataSource, UICollection
     }()
     
     let pages: [Page] = {
-        let firstPage = Page(title: "Order A Chef", message: "Use your smartphone to order a chef.", imageName: "intro1")
+        let firstPage = Page(title: "Order a chef", message: "Use your smartphone to order a chef.", imageName: "intro1")
         
-        let secondPage = Page(title: "Homecooked meals from anyone", message: "Delicious meals from local people", imageName: "intro2")
+        let secondPage = Page(title: "Homecooked meals from our registered chefs", message: "Delicious meals from local people.", imageName: "intro2")
         
-        let thirdPage = Page(title: "Complete Meal", message: "Pay your chef", imageName: "intro3")
+        let thirdPage = Page(title: "Try EatIn Today!", message: "All the luxury of going out to eat, but in the comfort of your own home! ", imageName: "intro3")
         
         return [firstPage, secondPage, thirdPage]
     }()
