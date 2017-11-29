@@ -49,6 +49,29 @@ class InboxController: UITableViewController {
         observeUserMessages()
 
     }
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    override func tableView(_ tableView: UITableView, commit editingStyle:
+        UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        guard let uid = Auth.auth().currentUser?.uid else{
+            return
+        }
+        let messages = self.mess[indexPath.row]
+        if let chatPartnerId = messages.chatPartnerId(){
+            Database.database().reference().child("user-messages").child(uid).child(chatPartnerId).removeValue(completionBlock: { (error, ref) in
+                if error != nil {
+                    print("Failed to delete message:",error)
+                }
+                self.mess.remove(at: indexPath.row)
+                self.messagesDictionary.removeValue(forKey: messages.chatPartnerId()!)
+                self.handleReloadTable()
+            })
+        }
+        
+        
+    }
+
     
     var timer: Timer?
     

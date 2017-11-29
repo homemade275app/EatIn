@@ -93,6 +93,7 @@ class InfoController: UIViewController, UICollectionViewDataSource, UICollection
         
     }
     
+    
     @objc
     func respondToSwipeGesture(gesture: UIGestureRecognizer)
     {
